@@ -1,0 +1,116 @@
+# プロジェクト作業ノート
+
+## プロジェクト概要
+- **プロジェクト名**: react-confetti-app
+- **技術スタック**: Vite + React + TypeScript + Biome
+- **パッケージマネージャー**: pnpm
+- **Node.js バージョン**: .nvmrc で管理中
+- **リンター/フォーマッター**: Biome
+
+## プロジェクト構成
+```
+react-confetti-app/
+├── .github/workflows/    # GitHub Actions CI/CD
+│   └── biome.yml         # Biomeチェックワークフロー
+├── .vscode/              # VS Code設定
+│   ├── settings.json     # エディタ設定（Biome自動フォーマット）
+│   └── extensions.json   # 推奨拡張機能（Biome）
+├── src/                  # ソースコード
+├── public/               # 静的ファイル
+├── node_modules/         # 依存関係（インストール済み）
+├── biome.json            # Biome設定
+├── .biomeignore          # Biome除外ファイル
+├── package.json          # プロジェクト設定
+├── vite.config.ts        # Vite設定
+└── tsconfig.*.json       # TypeScript設定
+```
+
+## 作業履歴
+
+### 2025-11-16 - セッション 1: Biomeセットアップ
+#### 完了した作業
+1. **Biomeインストールと初期化**
+   - `@biomejs/biome@2.3.5` をdevDependencyとして追加
+   - `pnpm exec biome init` で初期設定生成
+
+2. **Biome設定 (biome.json)**
+   - タブインデント使用
+   - ダブルクォート使用
+   - VCS統合有効化（Git連携）
+   - `organizeImports: "off"` に設定（VS Codeに任せる）
+
+3. **VS Code設定 (.vscode/settings.json)**
+   - Biomeをデフォルトフォーマッターに設定
+   - 保存時自動フォーマット有効化
+   - TypeScript/JavaScript/JSON/CSS でBiome使用
+
+4. **.gitignore更新**
+   - `.vscode/*` を削除（VS Code設定をコミットするため）
+   - `.vscode/extensions.json` は引き続き追跡
+
+5. **.biomeignore作成**
+   - `node_modules`, `build`, `dist` を除外
+
+6. **GitHub Actions CI設定**
+   - `.github/workflows/biome.yml` 作成
+   - main ブランチへのpush/PRで自動チェック
+   - Node.js 22, pnpm 10使用
+
+7. **README更新**
+   - ESLint説明を削除
+   - Biomeセットアップ手順を追加
+   - VS Code拡張機能のインストール手順追加
+   - Biomeコマンド一覧追加
+
+8. **package.json スクリプト追加**
+   - `lint` を `biome check .` に変更
+   - `biome:check`, `biome:fix`, `biome:format`, `biome:lint` スクリプト追加
+   - ESLint関連の依存関係を削除（122パッケージ削減）
+
+9. **.vscode/extensions.json 作成**
+   - Biome拡張機能を推奨設定に追加
+
+10. **ESLint完全削除**
+    - `eslint.config.js` 削除
+    - package.json から ESLint関連パッケージ削除
+      - @eslint/js, eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, typescript-eslint
+    - node_modules から不要パッケージ削除済み
+
+#### メモ
+- 全ファイルの整形（`pnpm exec biome check --write .`）完了済み
+- VS Code拡張機能「Biome (by biomejs)」インストール済み
+- ESLintから完全にBiomeへ移行完了
+
+## 現在の状態
+- ✅ プロジェクト初期化完了
+- ✅ 依存関係インストール済み
+- ✅ Biomeセットアップ完了
+- ✅ ESLint完全削除完了
+- ✅ package.jsonスクリプト設定完了
+- ✅ VS Code設定完了（settings.json + extensions.json）
+- ✅ ファイル整形完了
+- ✅ App.tsx と main.tsx のBiomeエラー/ワーニング修正完了
+- ⏸️ コミット待ち（ユーザーが実行予定）
+
+## 次回のタスク
+- 変更をコミット（ユーザーが実行）
+  - 推奨コミットメッセージ形式: `chore: setup Biome for linting and formatting`
+
+## 重要なコマンド
+```bash
+# package.json スクリプト（推奨）
+pnpm lint              # Biomeチェック（修正なし）
+pnpm biome:check       # 上記と同じ
+pnpm biome:fix         # Biomeチェック＆自動修正
+pnpm biome:format      # フォーマットのみ
+pnpm biome:lint        # リントのみ
+
+# 直接実行
+pnpm exec biome check .
+pnpm exec biome check --write .
+pnpm exec biome format --write <files>
+pnpm exec biome lint --write <files>
+```
+
+---
+最終更新: 2025-11-16
