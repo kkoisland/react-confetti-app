@@ -378,11 +378,36 @@ React Confettiはシンプルで使いやすいですが、より複雑な演出
 
 ### セットアップ手順（実装時の参考用）
 
+#### 0. スタイリング方針
+- **index.css**: すべての必要なCSSをここに集約
+- **インラインスタイル**: 必要に応じて使用
+- **方針**: CSSファイルを分散させず、index.cssに統一
+
 #### 1. Tailwind CSSのインストールと設定
+
+**インストール**：
 ```bash
-pnpm add -D tailwindcss postcss autoprefixer
-pnpm exec tailwindcss init -p
+pnpm add -D tailwindcss @tailwindcss/vite
 ```
+
+**src/index.cssを編集**：
+```css
+@import "tailwindcss";
+```
+既存のCSSは削除して、この1行のみにする。
+
+**vite.config.tsを編集**：
+```ts
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+```
+
+**クリーンアップ**：
+- `src/App.css` を削除（不要）
+- `src/App.tsx` をシンプルなHello Worldに変更
 
 #### 2. React Routerのインストールと設定
 ```bash
