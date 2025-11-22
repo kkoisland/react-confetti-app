@@ -147,6 +147,89 @@ react-confetti-app/
 - Tailwind v4は設定ファイル不要（デフォルトで動作）
 - 1つずつコミットする方針を確立
 
+### 2025-11-21 - セッション 4: React Router設定と基本レイアウト実装
+#### 完了した作業
+1. **React Router設定**
+   - `src/App.tsx`にルーティング設定追加
+     - `/` → `/basic` へ自動リダイレクト
+     - `/basic`, `/countdown`, `/toast`, `/seasonal`, `/playground` ルート設定
+   - `src/main.tsx`に`<BrowserRouter>`を追加
+
+2. **Layout.tsx作成**
+   - レスポンシブナビゲーションの実装（65行）
+   - デスクトップ：横並びメニュー（md:flex）
+   - モバイル：ハンバーガーメニュー（✕/☰ボタン）
+   - React Routerの`<Outlet />`でページコンテンツを表示
+
+3. **5つのページコンポーネント作成**
+   - `src/pages/BasicPage.tsx` - プレースホルダー
+   - `src/pages/CountdownPage.tsx` - プレースホルダー
+   - `src/pages/ToastPage.tsx` - プレースホルダー
+   - `src/pages/SeasonalPage.tsx` - プレースホルダー
+   - `src/pages/PlaygroundPage.tsx` - プレースホルダー
+
+4. **README更新**
+   - 最新の環境情報を反映
+
+#### コミットメッセージ
+```
+feat: set up React Router with layout and pages
+- Add BrowserRouter to main.tsx
+- Create 5 page components (Basic, Countdown, Toast, Seasonal, Playground)
+- Implement Layout component with header navigation and Outlet
+- Configure routes with redirect from / to /basic
+- Add responsive navigation structure (desktop/mobile)
+```
+
+#### メモ
+- レスポンシブナビゲーション構造は完成
+- スタイリングはまだ未実装（次のステップ）
+- 各ページはプレースホルダー状態
+
+### 2025-11-22 - セッション 5: Layout.tsxスタイリング開始
+#### 完了した作業
+1. **カラーテーマ決定**
+   - ベース文字色: `text-gray-800` (全体適用)
+   - アクセントカラー: `text-indigo-900` (ホバー時、濃い紺色)
+   - 真っ黒より読みやすいグレーを採用
+
+2. **ヘッダースタイリング**
+   - ガラスモーフィズム: `backdrop-blur-md`
+   - 影: `shadow-md`
+   - 上部固定: `sticky top-0 z-10`
+   - 背景色はルート要素で一元管理（ダークモード対応のため）
+
+3. **ロゴスタイリング**
+   - サイズ: `text-2xl`
+   - 太さ: `font-bold`
+   - ホバー効果: `hover:text-indigo-900 transition-colors`
+
+4. **ナビリンクスタイリング**
+   - デスクトップナビ: `hover:text-indigo-900 transition-colors`
+   - モバイルナビ: 縦並び（`block`）、パディング、大きめの文字（`text-lg`）
+
+5. **モバイルボタンスタイリング**
+   - サイズ: `text-3xl`
+   - ホバー効果: `hover:text-indigo-900 transition-colors`
+
+6. **メインエリア**
+   - ルート要素: `flex flex-col` で縦並びレイアウト
+   - メインエリア: `flex-grow` で余った空間を全部使う
+   - 紙吹雪が画面全体に広がるように設定
+
+7. **ナビゲーション余白調整**
+   - `px-4 py-2` でヘッダーに適切な余白
+   - `shadow-sm` で控えめな影
+
+8. **PLAN.md更新**
+   - カラーテーマセクションを追加
+   - 全ページで統一するデザイン仕様を明記
+
+#### メモ
+- Layout.tsxのスタイリング完了
+- すっきりしたデザインに調整済み
+- 次はダークモード実装、その後React Confettiインストール
+
 ## 現在の状態
 - ✅ プロジェクト初期化完了
 - ✅ 依存関係インストール済み
@@ -160,14 +243,21 @@ react-confetti-app/
 - ✅ ボイラープレートファイルのクリーンアップ完了
 - ✅ Tailwind CSSセットアップ完了
 - ✅ React Routerインストール完了
-- ⏸️ React Router設定（次回）
-- ⏸️ 基本レイアウト実装（次回）
+- ✅ React Router設定完了
+- ✅ レスポンシブナビゲーション構造完了
+- ✅ 5つのページコンポーネント作成完了（プレースホルダー状態）
+- ✅ Layout.tsxスタイリング完了
+- ⏸️ ダークモード実装（次）
+- ⏸️ React Confettiのインストール（次）
+- ⏸️ /basicページ実装（今後）
 
-## 次回のタスク
-- React Routerの設定（ルーティング、ページコンポーネント作成）
-- 基本レイアウト（上部ナビ + メインエリア）の実装
-- ダークモード切り替え実装
-- React Confettiのインストール
+## 次のタスク
+1. **ダークモード実装**
+   - ダーク/ライト切り替えボタン
+   - Tailwindの`dark:`クラス使用
+   - localStorageで設定保存（オプション）
+2. **React Confettiのインストール**
+   - `react-confetti` + `@types/react-confetti`のインストール
 
 ## 重要なコマンド
 ```bash
@@ -186,4 +276,4 @@ pnpm exec biome lint --write <files>
 ```
 
 ---
-最終更新: 2025-11-20
+最終更新: 2025-11-22
