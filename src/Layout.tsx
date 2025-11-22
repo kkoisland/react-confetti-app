@@ -13,18 +13,27 @@ const Layout = () => {
 	];
 
 	return (
-		<div>
-			<header>
-				<nav>
+		<div className="min-h-screen bg-white text-gray-800 flex flex-col">
+			<header className="backdrop-blur-md shadow-sm sticky top-0 z-10">
+				<nav className="px-4 py-2">
 					<div className="flex justify-between items-center">
 						<div>
-							<Link to="/">React Confetti</Link>
+							<Link
+								to="/"
+								className="text-2xl font-bold hover:text-indigo-900 transition-colors"
+							>
+								React Confetti
+							</Link>
 						</div>
 
 						{/* Desktop Navigation */}
 						<div className="hidden md:flex space-x-8">
 							{navLinks.map((link) => (
-								<Link key={link.to} to={link.to}>
+								<Link
+									key={link.to}
+									to={link.to}
+									className="hover:text-indigo-900 transition-colors"
+								>
 									{link.label}
 								</Link>
 							))}
@@ -32,7 +41,11 @@ const Layout = () => {
 
 						{/* Mobile Menu Button */}
 						<div className="md:hidden">
-							<button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+							<button
+								type="button"
+								onClick={() => setIsMenuOpen(!isMenuOpen)}
+								className="text-3xl hover:text-indigo-900 transition-colors"
+							>
 								{isMenuOpen ? "✕" : "☰"}
 							</button>
 						</div>
@@ -40,12 +53,13 @@ const Layout = () => {
 
 					{/* Mobile Navigation */}
 					{isMenuOpen && (
-						<div className="md:hidden">
+						<div className="md:hidden mt-4">
 							{navLinks.map((link) => (
 								<Link
 									key={link.to}
 									to={link.to}
 									onClick={() => setIsMenuOpen(false)}
+									className="block py-3 px-4 text-lg hover:text-indigo-900 transition-colors font-bold"
 								>
 									{link.label}
 								</Link>
@@ -55,7 +69,7 @@ const Layout = () => {
 				</nav>
 			</header>
 
-			<main>
+			<main className="flex-grow">
 				<Outlet />
 			</main>
 		</div>
