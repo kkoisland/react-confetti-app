@@ -230,6 +230,36 @@ feat: set up React Router with layout and pages
 - すっきりしたデザインに調整済み
 - 次はダークモード実装、その後React Confettiインストール
 
+### 2025-11-22 - セッション 6: ダークモード実装
+#### 完了した作業
+1. **ダークモードstate管理**
+   - `useState`でダーク/ライト状態を管理
+   - OS設定を初期値として使用: `window.matchMedia('(prefers-color-scheme: dark)').matches`
+   - ルート要素に`dark`クラスを動的に追加
+
+2. **Tailwind v4ダークモード設定**
+   - `index.css`に`@variant dark (&:where(.dark, .dark *))`を追加
+   - クラスベースのダークモード切り替えに変更（OS設定ベースから）
+
+3. **切り替えボタン実装**
+   - ヘッダー右側に配置
+   - 太陽/月アイコン（☀️/🌙）で状態表示
+   - デスクトップ・モバイル両方で表示
+
+4. **dark:クラスの適用**
+   - 背景: `dark:bg-gray-900`（業界標準の濃いグレー）
+   - 文字: `dark:text-gray-200`
+
+5. **localStorage実装**
+   - ユーザーの設定を`react-confetti-app:darkMode`キーで保存
+   - ページリロード後も設定を保持
+   - 優先順位: localStorage > OS設定
+
+#### メモ
+- ダークモード完全実装完了
+- localStorage保存により、ユーザー体験向上
+- 次はReact Confettiインストール
+
 ## 現在の状態
 - ✅ プロジェクト初期化完了
 - ✅ 依存関係インストール済み
@@ -247,17 +277,17 @@ feat: set up React Router with layout and pages
 - ✅ レスポンシブナビゲーション構造完了
 - ✅ 5つのページコンポーネント作成完了（プレースホルダー状態）
 - ✅ Layout.tsxスタイリング完了
-- ⏸️ ダークモード実装（次）
+- ✅ ダークモード実装完了（localStorage対応）
 - ⏸️ React Confettiのインストール（次）
 - ⏸️ /basicページ実装（今後）
 
 ## 次のタスク
-1. **ダークモード実装**
-   - ダーク/ライト切り替えボタン
-   - Tailwindの`dark:`クラス使用
-   - localStorageで設定保存（オプション）
-2. **React Confettiのインストール**
+1. **React Confettiのインストール**
    - `react-confetti` + `@types/react-confetti`のインストール
+2. **/basicページ実装**（第2節）
+   - グラデーション背景
+   - ON/OFFボタン
+   - 紙吹雪の表示/非表示
 
 ## 重要なコマンド
 ```bash
@@ -276,4 +306,4 @@ pnpm exec biome lint --write <files>
 ```
 
 ---
-最終更新: 2025-11-22
+最終更新: 2025-11-23
