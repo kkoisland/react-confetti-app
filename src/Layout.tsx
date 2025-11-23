@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const Layout = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [isDarkMode, setIsDarkMode] = useState(
-		() => window.matchMedia("(prefers-color-scheme: dark)").matches,
-	);
+	const [isDarkMode, setIsDarkMode] = useState(() => {
+		const saved = localStorage.getItem("react-confetti-app:darkMode");
+		if (saved !== null) return JSON.parse(saved);
+		return window.matchMedia("(prefers-color-scheme: dark)").matches;
+	});
 	const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+	useEffect(() => {
+		localStorage.setItem(
+			"react-confetti-app:darkMode",
+			JSON.stringify(isDarkMode),
+		);
+	}, [isDarkMode]);
 
 	const navLinks = [
 		{ to: "/basic", label: "Basic" },
