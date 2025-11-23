@@ -69,8 +69,7 @@
 - [ ] React Routerのセットアップ
 - [ ] 基本レイアウト（上部ナビ + ルーティング）作成
 - [ ] ダークモード切り替え実装（おまけ機能）
-- [ ] React Confettiのインストール: `pnpm add react-confetti`
-- [ ] 型定義のインストール: `pnpm add -D @types/react-confetti`
+- [ ] React Confettiのインストール: `pnpm add react-confetti` (型定義は含まれています)
 - [ ] 最小サンプルの動作確認
 
 ### 効果的なAIプロンプトのポイント
@@ -423,8 +422,8 @@ pnpm add react-router-dom
 #### 3. react-confettiのインストール
 ```bash
 pnpm add react-confetti
-pnpm add -D @types/react-confetti
 ```
+※型定義は既にパッケージに含まれているため、`@types/react-confetti`は不要です。
 
 #### 4. 基本レイアウト（上部ナビ + ルーティング）
 

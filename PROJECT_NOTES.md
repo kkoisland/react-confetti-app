@@ -260,6 +260,65 @@ feat: set up React Router with layout and pages
 - localStorage保存により、ユーザー体験向上
 - 次はReact Confettiインストール
 
+### 2025-11-23 - セッション 7: Tailwind CSS v4ダークモード修正
+#### 完了した作業
+1. **Tailwind CSS v4ベストプラクティスの調査**
+   - photo-showcaseとreact-confetti-appの実装を比較
+   - photo-showcaseはCSS変数方式、react-confetti-appは`dark:`バリアント方式と判明
+   - Tailwind CSS v4公式ドキュメントを確認
+
+2. **ダークモード実装の修正**
+   - `@variant dark`を`@custom-variant dark`に修正（正しいv4構文）
+   - `document.documentElement.classList.toggle("dark", isDarkMode)`を追加
+   - Layout.tsxの`div`要素から条件付き`dark`クラスを削除
+   - `<html>`要素にdarkクラスを適用するように変更（ページ全体対応）
+
+3. **Biome設定の追加**
+   - `biome.json`に`css.parser.tailwindDirectives: true`を追加
+   - Tailwind CSS v4の特殊構文（`@import`, `@custom-variant`など）をBiomeが認識可能に
+   - `.biomeignore`にindex.cssを追加する代わりに、正しい設定で解決
+
+4. **技術的な学び**
+   - Tailwind CSS v4では`tailwind.config.js`の`darkMode: "class"`設定は効かない
+   - v4では`@custom-variant`をCSSで直接定義する必要がある
+   - `@variant`と`@custom-variant`の違い：
+     - `@custom-variant`: バリアントの定義を上書き（darkのデフォルト動作変更）
+     - `@variant`: 既存バリアント内でスタイルを適用（テーマ内での使用）
+   - `document.documentElement`: ページ全体に影響を与える場合に使用
+   - `dark:`バリアント方式 vs CSS変数方式の使い分けを理解
+
+#### コミット情報
+- コミット済み
+- コミットメッセージ: `fix: fix dark mode to follow Tailwind CSS v4 best practices`
+  - Update to @custom-variant syntax in CSS
+  - Apply dark class to <html> element via document.documentElement
+  - Configure Biome to recognize Tailwind directives
+
+#### メモ
+- Tailwind CSS v4への移行で重要な学びを得た
+- Biomeのエラーが品質チェッカーとして機能し、正しい実装への気づきとなった
+- `.biomeignore`で問題を隠すのではなく、正しい設定で解決した
+- `classList.toggle(className, boolean)`の第2引数の活用法を学んだ
+
+### 2025-11-23 - セッション 8: React Confettiインストール
+#### 完了した作業
+1. **最新ドキュメント確認**
+   - GitHub公式リポジトリで最新のインストール方法を確認
+   - 型定義が既にパッケージに含まれていることを確認（`@types/react-confetti`は不要）
+
+2. **React Confettiインストール**
+   - `pnpm add react-confetti`を実行
+   - バージョン: `react-confetti@6.4.0`
+   - TypeScript対応済み（型定義内蔵）
+
+3. **ドキュメント更新**
+   - PLAN.mdから`@types/react-confetti`の記述を削除
+   - 型定義が不要である旨を明記
+
+#### メモ
+- 公式ドキュメントで確認することの重要性を再認識
+- 次は/basicページ実装に進む
+
 ## 現在の状態
 - ✅ プロジェクト初期化完了
 - ✅ 依存関係インストール済み
@@ -278,13 +337,13 @@ feat: set up React Router with layout and pages
 - ✅ 5つのページコンポーネント作成完了（プレースホルダー状態）
 - ✅ Layout.tsxスタイリング完了
 - ✅ ダークモード実装完了（localStorage対応）
-- ⏸️ React Confettiのインストール（次）
-- ⏸️ /basicページ実装（今後）
+- ✅ Tailwind CSS v4ダークモード修正完了（正しい構文に変更）
+- ✅ Biome設定でTailwindディレクティブ対応完了
+- ✅ React Confettiインストール完了（v6.4.0、型定義内蔵）
+- ⏸️ /basicページ実装（次）
 
 ## 次のタスク
-1. **React Confettiのインストール**
-   - `react-confetti` + `@types/react-confetti`のインストール
-2. **/basicページ実装**（第2節）
+1. **/basicページ実装**（第2節）
    - グラデーション背景
    - ON/OFFボタン
    - 紙吹雪の表示/非表示
@@ -306,4 +365,4 @@ pnpm exec biome lint --write <files>
 ```
 
 ---
-最終更新: 2025-11-23
+最終更新: 2025-11-23 (セッション 8完了)
