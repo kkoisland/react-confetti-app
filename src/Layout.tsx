@@ -3,6 +3,10 @@ import { Link, Outlet } from "react-router-dom";
 
 const Layout = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isDarkMode, setIsDarkMode] = useState(
+		() => window.matchMedia("(prefers-color-scheme: dark)").matches,
+	);
+	const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
 	const navLinks = [
 		{ to: "/basic", label: "Basic" },
@@ -13,7 +17,9 @@ const Layout = () => {
 	];
 
 	return (
-		<div className="min-h-screen bg-white text-gray-800 flex flex-col">
+		<div
+			className={`min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col ${isDarkMode ? "dark" : ""}`}
+		>
 			<header className="backdrop-blur-md shadow-sm sticky top-0 z-10">
 				<nav className="px-4 py-2">
 					<div className="flex justify-between items-center">
@@ -39,19 +45,24 @@ const Layout = () => {
 							))}
 						</div>
 
-						{/* Mobile Menu Button */}
-						<div className="md:hidden">
-							<button
-								type="button"
-								onClick={() => setIsMenuOpen(!isMenuOpen)}
-								className="text-3xl hover:text-indigo-900 transition-colors"
-							>
-								{isMenuOpen ? "✕" : "☰"}
+						{/* Right side buttons */}
+						<div className="flex items-center gap-4">
+							<button type="button" onClick={toggleTheme}>
+								{isDarkMode ? "☀️" : "🌙"}
 							</button>
+
+							<div className="md:hidden">
+								<button
+									type="button"
+									onClick={() => setIsMenuOpen(!isMenuOpen)}
+									className="text-3xl hover:text-indigo-900 transition-colors"
+								>
+									{isMenuOpen ? "✕" : "☰"}
+								</button>
+							</div>
 						</div>
 					</div>
 
-					{/* Mobile Navigation */}
 					{isMenuOpen && (
 						<div className="md:hidden mt-4">
 							{navLinks.map((link) => (
