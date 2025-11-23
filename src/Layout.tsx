@@ -15,6 +15,7 @@ const Layout = () => {
 			"react-confetti-app:darkMode",
 			JSON.stringify(isDarkMode),
 		);
+		document.documentElement.classList.toggle("dark", isDarkMode);
 	}, [isDarkMode]);
 
 	const navLinks = [
@@ -26,9 +27,7 @@ const Layout = () => {
 	];
 
 	return (
-		<div
-			className={`min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col ${isDarkMode ? "dark" : ""}`}
-		>
+		<div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col">
 			<header className="backdrop-blur-md shadow-sm sticky top-0 z-10">
 				<nav className="px-4 py-2">
 					<div className="flex justify-between items-center">
