@@ -319,7 +319,7 @@ feat: set up React Router with layout and pages
 - 公式ドキュメントで確認することの重要性を再認識
 - 次は/basicページ実装に進む
 
-### 2025-11-23 - セッション 9: BasicPage完全実装（第2節完了）
+### 2025-11-24 - セッション 9: BasicPage完全実装（第2節完了）
 #### 完了した作業
 1. **デザイン方針の変更**
    - 当初は各ページに異なる背景グラデーションを予定
@@ -367,6 +367,70 @@ feat: set up React Router with layout and pages
 - 初回レンダリング時に若干の遅延があるが、シンプルさを優先してパラメータなしで実装
 - 次は第3節（/countdown）の実装
 
+### 2025-11-24 - セッション 10: CountdownPage完全実装（第3節完了）
+#### 完了した作業
+1. **カウントダウンタイマー実装**
+   - `setTimeout`を使った1秒ごとのカウントダウン
+   - useEffectで依存配列`[isRunning, count]`によるトリガー
+   - `count`が変わるたびに新しいタイマーをセット
+   - クリーンアップ処理で`clearTimeout`
+
+2. **タイミング定数の導入**
+   - `INITIAL_TIME = 3` - 初期カウント時間
+   - `COUNTDOWN_INTERVAL = 1000` - カウントダウン間隔（1秒）
+   - `CONFETTI_DURATION = 7000` - 紙吹雪表示時間（7秒）
+   - マジックナンバーを排除して保守性向上
+
+3. **State管理**
+   - `count`: カウントダウンの現在値（3→2→1→0）
+   - `isRunning`: タイマー動作中フラグ
+   - `showConfetti`: 紙吹雪表示フラグ
+
+4. **自動紙吹雪制御**
+   - count = 0 で自動的に紙吹雪表示
+   - 2つ目のuseEffectで7秒後に自動消去
+   - 消去時にカウントを自動リセット
+
+5. **UI実装とスタイリング**
+   - カウントダウン表示: `text-8xl font-bold` + グラデーション（300番台）
+   - スタートボタン: `from-pink-300 via-purple-300 to-indigo-300`
+   - リセットボタン: グレー系グラデーション
+   - ボタンに`disabled`属性（カウントダウン中は押せない）
+   - 完了メッセージ: "🎉 Countdown complete!"（ボタンの下に配置）
+
+6. **色の最終決定**
+   - 300番台のグラデーション採用
+   - 200番台: 薄すぎる
+   - 400番台: 濃すぎる
+   - 300番台: ライト/ダークモード両方で見やすい
+
+7. **UX改善**
+   - メッセージをボタンの下に配置（初期状態の空白を解消）
+   - `h-8`で高さを固定してボタン位置の変動を防止
+   - 紙吹雪の表示時間を5秒→7秒に延長（達成感を味わえる）
+
+8. **デバッグ**
+   - console.logで実際の経過時間を確認（5.002秒で正確）
+   - 体感と実際の時間のズレを検証
+
+#### コミット情報
+- コミット済み
+- コミットメッセージ:
+  ```
+  feat: implement /countdown page with automatic confetti
+  - Implement 3-second countdown timer with auto-start confetti
+  - Add gradient countdown display and control buttons
+  - Auto-hide confetti after 7 seconds with count reset
+  - Use timing constants for maintainability
+  ```
+
+#### メモ
+- 第3節（/countdown）の実装完全完了
+- setTimeout + useEffectのパターン3を採用（シンプルで分かりやすい）
+- マジックナンバーを定数化する重要性を学習
+- リセットボタンにより、紙吹雪の表示時間を長めに設定できた
+- 次は第4節（/toast）の実装
+
 ## 現在の状態
 - ✅ プロジェクト初期化完了
 - ✅ 依存関係インストール済み
@@ -389,14 +453,16 @@ feat: set up React Router with layout and pages
 - ✅ Biome設定でTailwindディレクティブ対応完了
 - ✅ React Confettiインストール完了（v6.4.0、型定義内蔵）
 - ✅ 第2節（/basic）実装完了
-- ⏸️ 第3節（/countdown）実装（次）
+- ✅ 第3節（/countdown）実装完了
+- ⏸️ 第4節（/toast）実装（次）
 
 ## 次のタスク
-1. **第3節（/countdown）実装**
-   - カウントダウンタイマー（3秒）
-   - 0で自動的に紙吹雪表示
-   - 紙吹雪の自動消去（5秒後）
-   - リセットボタン
+1. **第4節（/toast）実装**
+   - Todoリスト（固定3つ）
+   - チェックボックスでタスク完了
+   - 3つ全て完了でトースト通知＋紙吹雪
+   - 自作トースト通知
+   - 紙吹雪の自動消去（3秒後）
 
 ## 重要なコマンド
 ```bash
@@ -415,4 +481,4 @@ pnpm exec biome lint --write <files>
 ```
 
 ---
-最終更新: 2025-11-23 (セッション 9完了 - 第2節完了)
+最終更新: 2025-11-24 (セッション 10完了 - 第3節完了)
