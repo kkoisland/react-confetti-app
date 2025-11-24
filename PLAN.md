@@ -72,12 +72,6 @@
 - [ ] React Confettiのインストール: `pnpm add react-confetti` (型定義は含まれています)
 - [ ] 最小サンプルの動作確認
 
-### 効果的なAIプロンプトのポイント
-- ❌ 曖昧：「紙吹雪を表示して」
-- ✅ 具体的：「react-confettiの<Confetti />コンポーネントをApp.tsxに配置して、画面全体に紙吹雪を表示」
-
-複数回のやりとりが必要なことも多いので、少しずつ調整していきましょう。
-
 ---
 
 ## 第2節 基本の紙吹雪 (`/basic`)
@@ -103,19 +97,6 @@
 - [ ] ボタンUIの作成（Tailwind + ガラスモーフィズム）
 - [ ] Confettiコンポーネントの条件付きレンダリング
 - [ ] ダークモード版の確認・調整
-
-### 効果的なAIプロンプトのポイント
-
-- ❌ 曖昧：「モダンなデザインで」
-- ✅ 具体的：「Tailwindのbg-blue-500、hover:bg-blue-600、px-6 py-3、rounded-lg」
-
-- ❌ 不明確：「ボタンを配置」
-- ✅ 明確：「画面中央にボタン、flexで縦横中央揃え（h-screen flex items-center justify-center）」
-
-- ❌ 暗黙的：「紙吹雪を表示/非表示」
-- ✅ 明示的：「useStateでisActiveを管理、trueの時だけ<Confetti />を条件付きレンダリング」
-
-複数回のやりとりで調整していくことを前提に進めましょう。
 
 ---
 
@@ -152,15 +133,6 @@
 - [ ] リセットボタン機能
 - [ ] ダークモード版の確認・調整
 
-### 効果的なAIプロンプトのポイント
-- ❌ 曖昧：「タイマーを実装」
-- ✅ 具体的：「useStateでcountを管理、useEffectで1秒ごとにsetIntervalでカウントダウン」
-
-- ❌ 不明確：「クリーンアップも実装」
-- ✅ 明確：「useEffectのreturn文でclearIntervalを呼び出してタイマーをクリーンアップ」
-
-タイマーのロジックは少し複雑なので、動作確認しながら調整しましょう。
-
 ---
 
 ## 第4節 実務での演出パターン (`/toast`)
@@ -191,15 +163,6 @@
 - [ ] チェック時の紙吹雪表示ロジック
 - [ ] 紙吹雪の自動消去（3秒後）
 - [ ] ダークモード版の確認・調整
-
-### 効果的なAIプロンプトのポイント
-- ❌ 曖昧：「タスク完了時にトーストと紙吹雪」
-- ✅ 具体的：「チェックボックスクリック時に、setShowToast(true)とsetShowConfetti(true)を呼び出し、3秒後にfalseに戻す」
-
-- ❌ 不明確：「トーストを表示」
-- ✅ 明確：「position: fixed、top-4、left-1/2、-translate-x-1/2で画面上部中央に配置、bg-green-500、px-6 py-3、rounded-lg、shadow-lg」
-
-シンプルなトースト通知を自作するので、React Confettiの使い方に集中できます。
 
 ---
 
@@ -238,15 +201,6 @@
 - [ ] デフォルト表示（桜🌸）の設定
 - [ ] パラメータ表示エリアの実装（現在のテーマのパラメータを表示）
 - [ ] ダークモード版の確認・調整
-
-### 効果的なAIプロンプトのポイント
-- ❌ 曖昧：「季節ごとにカスタマイズ」
-- ✅ 具体的：「桜はcolors=['#FFB7C5', '#FFC0CB']、numberOfPieces=150、gravity=0.05、雪はcolors=['#FFFFFF', '#E0F2F7']、numberOfPieces=300、gravity=0.02」
-
-- ❌ 不明確：「タブで切り替え」
-- ✅ 明確：「useStateでactiveSeasonを管理、タブクリックでsetActiveSeason()を呼び出し、activeSeasonに応じてConfettiのpropsを変更」
-
-パラメータの調整が重要なので、実際に見ながら微調整しましょう。
 
 ---
 
@@ -312,18 +266,6 @@
 - [ ] コピーボタンの実装（クリップボードにコピー、成功時に「コピー済み✓」表示）
 - [ ] 初期状態の紙吹雪表示（デフォルト設定で自動的に降る）
 - [ ] ダークモード版の確認・調整
-
-### 効果的なAIプロンプトのポイント
-- ❌ 曖昧：「スライダーで調整」
-- ✅ 具体的：「input type="range"でnumberOfPiecesを50-500の範囲、min=50、max=500、step=10、onChangeでstateを更新、スライダーの右に<span>{pieces}</span>で現在値表示」
-
-- ❌ 不明確：「カラーピッカーで色変更」
-- ✅ 明確：「3つのinput type="color"を用意、useStateでcolors配列を管理、onChange時に配列を更新してConfettiのcolorsプロパティに渡す」
-
-- ❌ 暗黙的：「コードスニペットを表示」
-- ✅ 明示的：「画面下部にposition: fixed、bg-gray-900、text-white、p-4でコードブロック表示、テンプレートリテラルで現在のstate値を埋め込み、navigator.clipboard.writeText()でコピー機能実装」
-
-UIコンポーネントが多いので、1つずつ追加していくと良いでしょう。
 
 ---
 
