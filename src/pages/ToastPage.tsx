@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 
+const TOAST_DURATION = 5000;
+
 const ToastPage = () => {
 	const [tasks, setTasks] = useState([
 		{ id: 1, text: "Task 1", completed: false },
@@ -16,7 +18,7 @@ const ToastPage = () => {
 		const timer = setTimeout(() => {
 			setShowConfetti(false);
 			setShowToast(false);
-		}, 5000);
+		}, TOAST_DURATION);
 
 		return () => clearTimeout(timer);
 	}, [showConfetti]);
