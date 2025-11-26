@@ -154,11 +154,12 @@ const SeasonalPage = () => {
 
 			{/* Parameters */}
 			{showConfetti && currentTheme && (
-				<div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+				<div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
 					<div className="flex items-start justify-between gap-4">
 						<div className="flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-400">
 							<div>
-								<span className="font-semibold">Theme:</span> {currentTheme.name}
+								<span className="font-semibold">Theme:</span>{" "}
+								{currentTheme.name}
 							</div>
 							<div>
 								<span className="font-semibold">Colors:</span>{" "}
@@ -174,7 +175,8 @@ const SeasonalPage = () => {
 							</div>
 							{currentTheme.wind !== undefined && (
 								<div>
-									<span className="font-semibold">Wind:</span> {currentTheme.wind}
+									<span className="font-semibold">Wind:</span>{" "}
+									{currentTheme.wind}
 								</div>
 							)}
 							{currentTheme.initialVelocityY !== undefined && (
