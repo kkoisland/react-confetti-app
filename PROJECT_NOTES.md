@@ -622,4 +622,95 @@ pnpm exec biome lint --write <files>
 ```
 
 ---
-最終更新: 2025-11-25 (セッション 12完了 - 第5節基本実装完了)
+
+### 2025-11-26 - セッション 13: 第5節パラメータ調整と記事執筆
+
+#### 完了した作業
+
+1. **テーマパラメータの調整**
+   - Sakura: wind 0.01, initialVelocityY -2 追加（花びらが舞い上がる動き）
+   - Snow: wind削除（静かにまっすぐ降る）
+   - Autumn: wind 0.02維持（風に舞う落ち葉）
+   - Star: initialVelocityY -5（上に打ち上がる星）
+   - Christmas: 粒子数500に増加、initialVelocityX 3追加（横に広がる祝砲）
+
+2. **クリスマステーマの色調整**
+   - 変更前: `["#FF0000", "#00FF00", "#FFD700"]`
+   - 変更後: `["#FF0000", "#00FF00", "#DAA520", "#4169E1"]`
+   - 理由: より豊かな色彩（ダークゴールド、ロイヤルブルー追加）
+
+3. **Description更新**
+   - パラメータの動きを反映した英語説明文に変更
+   - Sakura: "gently swirl and flutter in the breeze"
+   - Snow: "softly fall straight down"
+   - Autumn: "dance and swirl in the wind"
+   - Star: "shoot upward and twinkle down"
+   - Christmas: "bursts and spreads in celebration"
+
+4. **パラメータ表示の拡張**
+   - Wind, InitialVelocityY, InitialVelocityXを条件付きで表示
+   - `undefined`チェックでオプショナルパラメータのみ表示
+
+5. **記事執筆**
+   - `/Users/keiko/Code/github/react-tokyo-book/src/chapter_kkoisland_2/section05.md`を作成
+   - section02, 03, 04を参考に、冗長を避けた構成
+   - 7つのセクション構成:
+     1. カスタマイズ可能なパラメーター
+     2. テーマデータの設計
+     3. テーマ切り替えの実装
+     4. レスポンシブなUI設計
+     5. パラメーターの表示
+     6. カスタマイズのポイント
+     7. 実務での応用
+
+#### 重要な決定事項
+
+1. **雪の色について**
+   - 複数の青系の色を試行（`#E3F2FD`, `#B3E5FC`, `#DCEEF7`, `#A5D8E6`）
+   - 最終的に元の`["#FFFFFF", "#E0F2F7"]`に決定
+   - 理由: 最も雪らしい透明感と冷たさを表現
+   - ライトモードで見えにくいが、description に "(dark mode recommended)" で明記
+
+2. **コミット方針**
+   - Claude Codeはコミットを実行しない（ユーザーが必ず実行）
+   - コミットメッセージのみ提案する
+
+3. **記事執筆場所**
+   - `/Users/keiko/Code/github/react-tokyo-book/src/chapter_kkoisland_2/` に執筆
+   - チュートリアルアプリの実装と並行して記事を作成
+
+#### コミットメッセージ案
+```
+feat: refine seasonal theme parameters and descriptions
+
+- Add wind and initialVelocity parameters to themes for realistic motion
+- Update theme descriptions to reflect their unique animations:
+  - Sakura: petals swirl and flutter in the breeze
+  - Snow: snowflakes fall straight down
+  - Autumn: leaves dance and swirl in the wind
+  - Star: stars shoot upward and twinkle down
+  - Christmas: confetti bursts and spreads in celebration
+- Adjust numberOfPieces and gravity values for better visual effects
+- Update Christmas colors to include darker gold and royal blue
+- Display wind and velocity parameters in parameter panel
+```
+
+#### 技術的な学び
+
+1. **パラメータの効果**
+   - `gravity`: 0.01-0.02（ゆっくり）、0.06-0.08（速く）
+   - `wind`: 正の値で右に流れる、負の値で左に流れる、0でまっすぐ
+   - `initialVelocityY`: 負の値で上向きに打ち上がる
+   - `initialVelocityX`: 横方向に広がる
+
+2. **色選びのポイント**
+   - ライトモード/ダークモード両方で見やすい色を選ぶ
+   - 白い紙吹雪はダークモード推奨と明記する
+   - テーマに合った2-4色を配列で指定
+
+3. **パフォーマンス最適化**
+   - themesデータをコンポーネント外に定義
+   - 再レンダリング時の無駄な配列生成を防ぐ
+
+---
+最終更新: 2025-11-26 (セッション 13完了 - 第5節パラメータ調整と記事執筆完了)
