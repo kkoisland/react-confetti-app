@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Confetti from "react-confetti";
 
+const THEME_SWITCH_DELAY = 100;
+
 const themes = [
 	{
 		id: "sakura",
@@ -36,10 +38,11 @@ const themes = [
 		id: "star",
 		name: "Star",
 		emoji: "✨",
-		description: "Stars shoot upward and twinkle down",
-		colors: ["#FFD700", "#FFFF00"],
+		description:
+			"Gold, silver, and sand shimmer and gently float (dark mode recommended)",
+		colors: ["#DAA520", "#E8E8E8", "#E6BE8A"],
 		numberOfPieces: 100,
-		gravity: 0.03,
+		gravity: 0.0005,
 		initialVelocityY: -5,
 	},
 	{
@@ -50,7 +53,7 @@ const themes = [
 		colors: ["#FF0000", "#00FF00", "#DAA520", "#4169E1"],
 		numberOfPieces: 500,
 		gravity: 0.06,
-		initialVelocityX: 3,
+		initialVelocityX: 5,
 	},
 ];
 
@@ -76,7 +79,7 @@ const SeasonalPage = () => {
 								setSelectedThemeIndex(index);
 								setTimeout(() => {
 									setShowConfetti(true);
-								}, 100);
+								}, THEME_SWITCH_DELAY);
 							}}
 							className={`px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl ${
 								isSelected
