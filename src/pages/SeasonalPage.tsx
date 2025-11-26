@@ -6,46 +6,51 @@ const themes = [
 		id: "sakura",
 		name: "Sakura",
 		emoji: "🌸",
-		description: "Cherry blossom petals gently fall",
+		description: "Cherry blossom petals gently swirl and flutter in the breeze",
 		colors: ["#FFB7C5", "#FFC0CB"],
-		numberOfPieces: 150,
-		gravity: 0.05,
+		numberOfPieces: 100,
+		gravity: 0.02,
+		wind: 0.01,
+		initialVelocityY: -2,
 	},
 	{
 		id: "snow",
 		name: "Snow",
 		emoji: "❄️",
-		description: "Snowflakes softly drift down (dark mode recommended)",
+		description: "Snowflakes softly fall straight down (dark mode recommended)",
 		colors: ["#FFFFFF", "#E0F2F7"],
 		numberOfPieces: 300,
-		gravity: 0.02,
+		gravity: 0.01,
 	},
 	{
 		id: "koyo",
 		name: "Autumn",
 		emoji: "🍁",
-		description: "Autumn leaves fall in the breeze",
+		description: "Autumn leaves dance and swirl in the wind",
 		colors: ["#FF6347", "#FFA500"],
 		numberOfPieces: 200,
 		gravity: 0.08,
+		wind: 0.02,
 	},
 	{
 		id: "star",
 		name: "Star",
 		emoji: "✨",
-		description: "Stars twinkle in the night sky",
+		description: "Stars shoot upward and twinkle down",
 		colors: ["#FFD700", "#FFFF00"],
 		numberOfPieces: 100,
 		gravity: 0.03,
+		initialVelocityY: -5,
 	},
 	{
 		id: "christmas",
 		name: "Christmas",
 		emoji: "🎄",
-		description: "Festive Christmas colors celebrate",
-		colors: ["#FF0000", "#00FF00", "#FFD700"],
-		numberOfPieces: 250,
+		description: "Festive confetti bursts and spreads in celebration",
+		colors: ["#FF0000", "#00FF00", "#DAA520", "#4169E1"],
+		numberOfPieces: 500,
 		gravity: 0.06,
+		initialVelocityX: 3,
 	},
 ];
 
@@ -107,6 +112,9 @@ const SeasonalPage = () => {
 					colors={currentTheme.colors}
 					numberOfPieces={currentTheme.numberOfPieces}
 					gravity={currentTheme.gravity}
+					wind={currentTheme.wind}
+					initialVelocityY={currentTheme.initialVelocityY}
+					initialVelocityX={currentTheme.initialVelocityX}
 				/>
 			)}
 
@@ -129,6 +137,23 @@ const SeasonalPage = () => {
 							<span className="font-semibold">Gravity:</span>{" "}
 							{currentTheme.gravity}
 						</div>
+						{currentTheme.wind !== undefined && (
+							<div>
+								<span className="font-semibold">Wind:</span> {currentTheme.wind}
+							</div>
+						)}
+						{currentTheme.initialVelocityY !== undefined && (
+							<div>
+								<span className="font-semibold">InitialVelocityY:</span>{" "}
+								{currentTheme.initialVelocityY}
+							</div>
+						)}
+						{currentTheme.initialVelocityX !== undefined && (
+							<div>
+								<span className="font-semibold">InitialVelocityX:</span>{" "}
+								{currentTheme.initialVelocityX}
+							</div>
+						)}
 					</div>
 				</div>
 			)}
