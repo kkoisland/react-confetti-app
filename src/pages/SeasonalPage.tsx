@@ -64,6 +64,37 @@ const SeasonalPage = () => {
 	const currentTheme =
 		selectedThemeIndex !== null ? themes[selectedThemeIndex] : null;
 	const [showConfetti, setShowConfetti] = useState(false);
+	const [copied, setCopied] = useState(false);
+
+	const handleCopyCode = () => {
+		if (!currentTheme) return;
+
+		const jsxCode = `<Confetti
+    colors={${JSON.stringify(currentTheme.colors)}}
+    numberOfPieces={${currentTheme.numberOfPieces}}
+    gravity={${currentTheme.gravity}}${
+			currentTheme.wind !== undefined
+				? `\n  
+  wind={${currentTheme.wind}}`
+				: ""
+		}${
+			currentTheme.initialVelocityY !== undefined
+				? `\n  
+  initialVelocityY={${currentTheme.initialVelocityY}}`
+				: ""
+		}${
+			currentTheme.initialVelocityX !== undefined
+				? `\n  initialVelocityX={${currentTheme.initialVelocityX}}`
+				: ""
+		}
+  />`;
+
+		navigator.clipboard.writeText(jsxCode);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+	};
 
 	return (
 		<div className="flex flex-col items-center justify-center h-full gap-8 p-4">
@@ -124,39 +155,48 @@ const SeasonalPage = () => {
 			{/* Parameters */}
 			{showConfetti && currentTheme && (
 				<div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-					<div className="flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-400">
-						<div>
-							<span className="font-semibold">Theme:</span> {currentTheme.name}
-						</div>
-						<div>
-							<span className="font-semibold">Colors:</span>{" "}
-							{currentTheme.colors.join(", ")}
-						</div>
-						<div>
-							<span className="font-semibold">Pieces:</span>{" "}
-							{currentTheme.numberOfPieces}
-						</div>
-						<div>
-							<span className="font-semibold">Gravity:</span>{" "}
-							{currentTheme.gravity}
-						</div>
-						{currentTheme.wind !== undefined && (
+					<div className="flex items-start justify-between gap-4">
+						<div className="flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-400">
 							<div>
-								<span className="font-semibold">Wind:</span> {currentTheme.wind}
+								<span className="font-semibold">Theme:</span> {currentTheme.name}
 							</div>
-						)}
-						{currentTheme.initialVelocityY !== undefined && (
 							<div>
-								<span className="font-semibold">InitialVelocityY:</span>{" "}
-								{currentTheme.initialVelocityY}
+								<span className="font-semibold">Colors:</span>{" "}
+								{currentTheme.colors.join(", ")}
 							</div>
-						)}
-						{currentTheme.initialVelocityX !== undefined && (
 							<div>
-								<span className="font-semibold">InitialVelocityX:</span>{" "}
-								{currentTheme.initialVelocityX}
+								<span className="font-semibold">Pieces:</span>{" "}
+								{currentTheme.numberOfPieces}
 							</div>
-						)}
+							<div>
+								<span className="font-semibold">Gravity:</span>{" "}
+								{currentTheme.gravity}
+							</div>
+							{currentTheme.wind !== undefined && (
+								<div>
+									<span className="font-semibold">Wind:</span> {currentTheme.wind}
+								</div>
+							)}
+							{currentTheme.initialVelocityY !== undefined && (
+								<div>
+									<span className="font-semibold">InitialVelocityY:</span>{" "}
+									{currentTheme.initialVelocityY}
+								</div>
+							)}
+							{currentTheme.initialVelocityX !== undefined && (
+								<div>
+									<span className="font-semibold">InitialVelocityX:</span>{" "}
+									{currentTheme.initialVelocityX}
+								</div>
+							)}
+						</div>
+						<button
+							type="button"
+							onClick={handleCopyCode}
+							className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-orange-100 to-pink-200 text-gray-800 font-semibold rounded hover:from-orange-200 hover:to-pink-300 transition-all whitespace-nowrap"
+						>
+							{copied ? "Copied!" : "Copy Code"}
+						</button>
 					</div>
 				</div>
 			)}

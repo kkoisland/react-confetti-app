@@ -171,16 +171,6 @@ react-confetti-app/
 4. **README更新**
    - 最新の環境情報を反映
 
-#### コミットメッセージ
-```
-feat: set up React Router with layout and pages
-- Add BrowserRouter to main.tsx
-- Create 5 page components (Basic, Countdown, Toast, Seasonal, Playground)
-- Implement Layout component with header navigation and Outlet
-- Configure routes with redirect from / to /basic
-- Add responsive navigation structure (desktop/mobile)
-```
-
 #### メモ
 - レスポンシブナビゲーション構造は完成
 - スタイリングはまだ未実装（次のステップ）
@@ -286,13 +276,6 @@ feat: set up React Router with layout and pages
      - `@variant`: 既存バリアント内でスタイルを適用（テーマ内での使用）
    - `document.documentElement`: ページ全体に影響を与える場合に使用
    - `dark:`バリアント方式 vs CSS変数方式の使い分けを理解
-
-#### コミット情報
-- コミット済み
-- コミットメッセージ: `fix: fix dark mode to follow Tailwind CSS v4 best practices`
-  - Update to @custom-variant syntax in CSS
-  - Apply dark class to <html> element via document.documentElement
-  - Configure Biome to recognize Tailwind directives
 
 #### メモ
 - Tailwind CSS v4への移行で重要な学びを得た
@@ -413,17 +396,6 @@ feat: set up React Router with layout and pages
    - console.logで実際の経過時間を確認（5.002秒で正確）
    - 体感と実際の時間のズレを検証
 
-#### コミット情報
-- コミット済み
-- コミットメッセージ:
-  ```
-  feat: implement /countdown page with automatic confetti
-  - Implement 3-second countdown timer with auto-start confetti
-  - Add gradient countdown display and control buttons
-  - Auto-hide confetti after 7 seconds with count reset
-  - Use timing constants for maintainability
-  ```
-
 #### メモ
 - 第3節（/countdown）の実装完全完了
 - setTimeout + useEffectのパターン3を採用（シンプルで分かりやすい）
@@ -484,10 +456,6 @@ feat: set up React Router with layout and pages
 - htmlFor: ラベルとinputの関連付け（オートフォーカスではない）
 - Flexbox: `justify-center`は縦方向（`flex-col`時）、`items-center`は横方向
 - Layout高さ: `h-full`は親要素の高さに依存、具体的な`mt-*`で対処
-
-#### コミット情報
-- コミット予定
-- コミットメッセージ案: `feat: implement /toast page with todo list and toast notification`
 
 #### メモ
 - 第4節（/toast）の実装完全完了
@@ -559,10 +527,6 @@ feat: set up React Router with layout and pages
 - Responsive: `flex-col md:flex-row`でモバイル/デスクトップ切り替え
 - Fixed positioning: モバイルとデスクトップで異なる位置指定（`bottom-4 md:top-1/2`）
 - map()にkeyが必須：リスト表示時のReactの要件
-
-#### コミット情報
-- コミット予定
-- コミットメッセージ案: `feat: implement /seasonal page with theme switching`
 
 #### メモ
 - 第5節（/seasonal）の基本実装完了
@@ -673,27 +637,10 @@ pnpm exec biome lint --write <files>
 
 2. **コミット方針**
    - Claude Codeはコミットを実行しない（ユーザーが必ず実行）
-   - コミットメッセージのみ提案する
 
 3. **記事執筆場所**
    - `/Users/keiko/Code/github/react-tokyo-book/src/chapter_kkoisland_2/` に執筆
    - チュートリアルアプリの実装と並行して記事を作成
-
-#### コミットメッセージ案
-```
-feat: refine seasonal theme parameters and descriptions
-
-- Add wind and initialVelocity parameters to themes for realistic motion
-- Update theme descriptions to reflect their unique animations:
-  - Sakura: petals swirl and flutter in the breeze
-  - Snow: snowflakes fall straight down
-  - Autumn: leaves dance and swirl in the wind
-  - Star: stars shoot upward and twinkle down
-  - Christmas: confetti bursts and spreads in celebration
-- Adjust numberOfPieces and gravity values for better visual effects
-- Update Christmas colors to include darker gold and royal blue
-- Display wind and velocity parameters in parameter panel
-```
 
 #### 技術的な学び
 
@@ -713,4 +660,47 @@ feat: refine seasonal theme parameters and descriptions
    - 再レンダリング時の無駄な配列生成を防ぐ
 
 ---
-最終更新: 2025-11-26 (セッション 13完了 - 第5節パラメータ調整と記事執筆完了)
+
+### 2025-11-26 - セッション 14: Copy Code機能追加
+
+#### 完了した作業
+
+1. **Copy Code機能の実装**
+   - パラメーターパネルにJSXコードをコピーするボタンを追加
+   - `navigator.clipboard.writeText()` を使用してクリップボードにコピー
+   - `copied` state を追加して、コピー成功のフィードバック表示
+   - 2秒間「Copied!」と表示し、その後「Copy Code」に戻る
+
+2. **ボタンのスタイリング**
+   - オレンジ/ピンクのグラデーション（テーマ選択ボタンと統一）
+   - 小さいサイズ（`text-xs`, `px-2 py-1`）
+   - 固定幅（`w-20`）でテキスト変更時のレイアウトシフトを防止
+   - ホバー時に色が濃くなる
+
+3. **レイアウト調整**
+   - パラメーター表示とボタンを横並びに配置（`flex justify-between`）
+   - ボタンを右端に配置
+   - `gap-4` でパラメーターとボタンの間に適切なスペース
+
+4. **コピーされるコード形式**
+   - 完全なJSX形式（`<Confetti ... />`）
+   - オプショナルなパラメーター（wind, initialVelocityX/Y）は存在する場合のみ含める
+   - そのままプロジェクトに貼り付けられる実用的な形式
+
+#### 技術的な学び
+
+1. **Clipboard API**
+   - `navigator.clipboard.writeText()` で文字列をクリップボードにコピー
+   - 非同期処理だが、今回はエラーハンドリングなしでシンプルに実装
+
+2. **動的な文字列生成**
+   - テンプレートリテラルと条件演算子でJSXコードを生成
+   - オプショナルパラメーターの条件付き追加
+
+3. **UXパターン**
+   - コピー成功のフィードバックは2秒間表示
+   - ボタンサイズ固定でレイアウトシフトを防ぐ
+   - アクションボタンは右端に配置
+
+---
+最終更新: 2025-11-26 (セッション 14完了 - Copy Code機能追加)
