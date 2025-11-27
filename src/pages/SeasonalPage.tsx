@@ -41,9 +41,9 @@ const themes = [
 		description:
 			"Gold, silver, and sand shimmer and gently float (dark mode recommended)",
 		colors: ["#DAA520", "#E8E8E8", "#E6BE8A"],
-		numberOfPieces: 100,
+		numberOfPieces: 150,
 		gravity: 0.0005,
-		initialVelocityY: -5,
+		initialVelocityY: -9,
 	},
 	{
 		id: "christmas",
