@@ -234,10 +234,12 @@
   - Reset Colorsボタン：デフォルトに戻す
 
 **その他の機能**：
-- **プリセットボタン**：第5節の5つのテーマ（桜、雪、紅葉、星、クリスマス）をワンクリック適用
-- **Reset Colorsボタン**：色の設定をデフォルト（17色）に戻す
-- **Reset Parametersボタン**：スライダーのパラメーター（色以外）をデフォルト値に戻す
-- **Reset Allボタン**：全パラメーター（色含む）をデフォルト値に戻す
+- **Stop/Start Confettiボタン**：紙吹雪の表示/非表示を切り替え
+- **プリセットボタン**：第5節の5つのテーマ（桜、雪、紅葉、星、クリスマス）をワンクリック適用（自動的に紙吹雪が再起動）
+- **Reset Colorsボタン**：色の設定をデフォルト（17色）に戻す（自動的に紙吹雪が再起動）
+- **Reset Parametersボタン**：スライダーのパラメーター（色以外）をデフォルト値に戻す（自動的に紙吹雪が再起動）
+- **Reset Allボタン**：全パラメーター（色含む）をデフォルト値に戻す（自動的に紙吹雪が再起動）
+- **スライダー調整時の自動再起動**：スライダーを離した瞬間（onMouseUp/onTouchEnd）に紙吹雪が再起動し、正しい挙動で表示される
 - **パラメータ値の表示**：各スライダーの隣に現在値とデフォルト値を表示
 - **コードスニペット表示**：画面下部に水平中央配置、リアルタイム更新、コピーボタン付き
 - **コピー成功通知**：コピーボタンを押すとテキストが「コピー済み✓」に変わる（2秒後に戻る）
@@ -271,16 +273,16 @@
 - **ボタン背景**: `bg-gradient-to-br from-white via-green-100 to-cyan-200`
 - **レイアウト**：
   - **上部**：調整UI（6行構成）
-    - Row 1：スライダー3つ（numberOfPieces, gravity, wind）横並び
-    - Row 2：スライダー2つ（initialVelocityX, initialVelocityY）横並び
-    - Row 3：スライダー2つ（friction, opacity）横並び
+    - Row 1：スライダー3つ（numberOfPieces, gravity, wind）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 2：スライダー2つ（initialVelocityX, initialVelocityY）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 3：スライダー2つ（friction, opacity）横並び（onMouseUp/onTouchEndで自動再起動）
     - Row 4：カラー選択
       - ラジオボタン「Use default colors (17 colors)」（デフォルト選択）
       - ラジオボタン「Custom colors (up to 5)」＋カラーピッカー5つ（条件付き表示）
     - Row 5：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び
-    - Row 6：リセットボタン3つ（Reset Colors, Reset Parameters, Reset All）横並び
+    - Row 6：コントロールボタン4つ（Stop/Start Confetti, Reset Colors, Reset Parameters, Reset All）横並び
   - **下部**：コードスニペット表示（水平中央配置、bg-gray-900、z-index高、紙吹雪の上に重なる）
-  - **全体**：紙吹雪が画面全体に降る
+  - **全体**：紙吹雪が画面全体に降る（showConfettiがtrueの場合のみ）
 
 ### 実装タスク
 - [ ] `/playground` ページの作成

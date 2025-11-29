@@ -33,10 +33,16 @@ const PlaygroundPage = () => {
 	]);
 
 	const [copied, setCopied] = useState(false);
+	const [showConfetti, setShowConfetti] = useState(true);
 
 	const confettiColors = useCustomColors
 		? customColors.filter((c) => c !== "")
 		: undefined; // undefined uses React Confetti's default 17 colors
+
+	const restartConfetti = () => {
+		setShowConfetti(false);
+		setTimeout(() => setShowConfetti(true), 100);
+	};
 
 	const handleResetParameters = () => {
 		setNumberOfPieces(DEFAULT_VALUES.numberOfPieces);
@@ -46,16 +52,26 @@ const PlaygroundPage = () => {
 		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
 		setFriction(DEFAULT_VALUES.friction);
 		setOpacity(DEFAULT_VALUES.opacity);
+		restartConfetti();
 	};
 
 	const handleResetColors = () => {
 		setCustomColors(DEFAULT_VALUES.customColors);
 		setUseCustomColors(DEFAULT_VALUES.useCustomColors);
+		restartConfetti();
 	};
 
 	const handleResetAll = () => {
-		handleResetParameters();
-		handleResetColors();
+		setNumberOfPieces(DEFAULT_VALUES.numberOfPieces);
+		setGravity(DEFAULT_VALUES.gravity);
+		setWind(DEFAULT_VALUES.wind);
+		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
+		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
+		setFriction(DEFAULT_VALUES.friction);
+		setOpacity(DEFAULT_VALUES.opacity);
+		setCustomColors(DEFAULT_VALUES.customColors);
+		setUseCustomColors(DEFAULT_VALUES.useCustomColors);
+		restartConfetti();
 	};
 
 	const handlePreset = (themeIndex: number) => {
@@ -79,6 +95,7 @@ const PlaygroundPage = () => {
 		}
 		setCustomColors(themeColors);
 		setUseCustomColors(true);
+		restartConfetti();
 	};
 
 	return (
@@ -102,6 +119,8 @@ const PlaygroundPage = () => {
 							step="10"
 							value={numberOfPieces}
 							onChange={(e) => setNumberOfPieces(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
 					</div>
@@ -119,8 +138,10 @@ const PlaygroundPage = () => {
 							max="0.3"
 							step="0.01"
 							value={gravity}
-							className="w-full"
 							onChange={(e) => setGravity(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
+							className="w-full"
 						/>
 					</div>
 					<div className="flex-1">
@@ -137,8 +158,10 @@ const PlaygroundPage = () => {
 							max="0.1"
 							step="0.01"
 							value={wind}
-							className="w-full"
 							onChange={(e) => setWind(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
+							className="w-full"
 						/>
 					</div>
 				</div>
@@ -159,6 +182,8 @@ const PlaygroundPage = () => {
 							step="1"
 							value={initialVelocityX}
 							onChange={(e) => setInitialVelocityX(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
 					</div>
@@ -178,6 +203,8 @@ const PlaygroundPage = () => {
 							step="1"
 							value={initialVelocityY}
 							onChange={(e) => setInitialVelocityY(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
 					</div>
@@ -200,6 +227,8 @@ const PlaygroundPage = () => {
 							step="0.01"
 							value={friction}
 							onChange={(e) => setFriction(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
 					</div>
@@ -219,6 +248,8 @@ const PlaygroundPage = () => {
 							step="0.1"
 							value={opacity}
 							onChange={(e) => setOpacity(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
 					</div>
@@ -323,8 +354,15 @@ const PlaygroundPage = () => {
 					</div>
 				</div>
 
-				{/* Row 6: Reset buttons */}
+				{/* Row 6: Control buttons */}
 				<div className="flex gap-2">
+					<button
+						type="button"
+						onClick={() => setShowConfetti(!showConfetti)}
+						className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded font-semibold hover:bg-blue-600 dark:hover:bg-blue-700 transition-all"
+					>
+						{showConfetti ? "Stop Confetti" : "Start Confetti"}
+					</button>
 					<button
 						type="button"
 						onClick={handleResetColors}
@@ -350,16 +388,18 @@ const PlaygroundPage = () => {
 			</div>
 
 			{/* Confetti (fullscreen) */}
-			<Confetti
-				numberOfPieces={numberOfPieces}
-				gravity={gravity}
-				wind={wind}
-				initialVelocityX={initialVelocityX}
-				initialVelocityY={initialVelocityY}
-				friction={friction}
-				opacity={opacity}
-				colors={confettiColors}
-			/>
+			{showConfetti && (
+				<Confetti
+					numberOfPieces={numberOfPieces}
+					gravity={gravity}
+					wind={wind}
+					initialVelocityX={initialVelocityX}
+					initialVelocityY={initialVelocityY}
+					friction={friction}
+					opacity={opacity}
+					colors={confettiColors}
+				/>
+			)}
 
 			{/* Bottom: Code snippet */}
 			<div className="fixed bottom-4 left-1/2 -translate-x-1/2">
