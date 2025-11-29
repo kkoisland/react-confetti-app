@@ -38,10 +38,53 @@ const PlaygroundPage = () => {
 		? customColors.filter((c) => c !== "")
 		: undefined; // undefined uses React Confetti's default 17 colors
 
+	const handleResetParameters = () => {
+		setNumberOfPieces(DEFAULT_VALUES.numberOfPieces);
+		setGravity(DEFAULT_VALUES.gravity);
+		setWind(DEFAULT_VALUES.wind);
+		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
+		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
+		setFriction(DEFAULT_VALUES.friction);
+		setOpacity(DEFAULT_VALUES.opacity);
+	};
+
+	const handleResetColors = () => {
+		setCustomColors(DEFAULT_VALUES.customColors);
+		setUseCustomColors(DEFAULT_VALUES.useCustomColors);
+	};
+
+	const handleResetAll = () => {
+		handleResetParameters();
+		handleResetColors();
+	};
+
+	const handlePreset = (themeIndex: number) => {
+		const theme = themes[themeIndex];
+		setNumberOfPieces(theme.numberOfPieces);
+		setGravity(theme.gravity);
+		setWind(theme.wind ?? DEFAULT_VALUES.wind);
+		setInitialVelocityX(
+			theme.initialVelocityX ?? DEFAULT_VALUES.initialVelocityX,
+		);
+		setInitialVelocityY(
+			theme.initialVelocityY ?? DEFAULT_VALUES.initialVelocityY,
+		);
+		setFriction(DEFAULT_VALUES.friction);
+		setOpacity(DEFAULT_VALUES.opacity);
+
+		// Set colors from theme
+		const themeColors = [...theme.colors];
+		while (themeColors.length < 5) {
+			themeColors.push("");
+		}
+		setCustomColors(themeColors);
+		setUseCustomColors(true);
+	};
+
 	return (
 		<div className="flex flex-col h-full">
 			{/* Controls */}
-			<div className="p-4 bg-white dark:bg-gray-800">
+			<div className="p-4">
 				{/* Row 1 */}
 				<div className="flex gap-4 mb-4">
 					<div className="flex-1">
@@ -180,15 +223,12 @@ const PlaygroundPage = () => {
 						/>
 					</div>
 				</div>
-				{/* Row 4 */}
+				{/* Row 4: Colors */}
 				<div className="mb-4">
 					<div className="mb-3">
-						<label
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
-							htmlFor={useCustomColors ? "customColors" : "defaultColors"}
-						>
+						<div className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
 							Colors:
-						</label>
+						</div>
 						<div className="flex gap-4">
 							<div className="flex items-center">
 								<input
@@ -261,22 +301,52 @@ const PlaygroundPage = () => {
 										/>
 									</div>
 								))}
-								<button
-									type="button"
-									onClick={() => {
-										setCustomColors(["#FF0000", "#00FF00", "#0000FF", "", ""]);
-										setUseCustomColors(false);
-									}}
-									className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
-								>
-									Reset Colors
-								</button>
 							</div>
 						</div>
 					)}
 				</div>
-				{/* Preset buttons (5 themes) */}
-				{/* Reset All button */}
+				{/* Row 5: Preset buttons */}
+				<div className="mb-4">
+					<div className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+						Preset Themes:
+					</div>
+					<div className="flex flex-wrap gap-2">
+						{themes.map((theme, index) => (
+							<button
+								key={theme.id}
+								type="button"
+								onClick={() => handlePreset(index)}
+							>
+								{theme.emoji} {theme.name}
+							</button>
+						))}
+					</div>
+				</div>
+
+				{/* Row 6: Reset buttons */}
+				<div className="flex gap-2">
+					<button
+						type="button"
+						onClick={handleResetColors}
+						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+					>
+						Reset Colors
+					</button>
+					<button
+						type="button"
+						onClick={handleResetParameters}
+						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+					>
+						Reset Parameters
+					</button>
+					<button
+						type="button"
+						onClick={handleResetAll}
+						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+					>
+						Reset All
+					</button>
+				</div>
 			</div>
 
 			{/* Confetti (fullscreen) */}
