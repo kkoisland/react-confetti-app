@@ -44,6 +44,31 @@ const PlaygroundPage = () => {
 		setTimeout(() => setShowConfetti(true), 100);
 	};
 
+	const generateCodeSnippet = () => {
+		const params: string[] = [];
+
+		params.push(`numberOfPieces={${numberOfPieces}}`);
+		params.push(`gravity={${gravity}}`);
+		params.push(`wind={${wind}}`);
+		params.push(`initialVelocityX={${initialVelocityX}}`);
+		params.push(`initialVelocityY={${initialVelocityY}}`);
+		params.push(`friction={${friction}}`);
+		params.push(`opacity={${opacity}}`);
+
+		if (useCustomColors && confettiColors && confettiColors.length > 0) {
+			params.push(`colors={${JSON.stringify(confettiColors)}}`);
+		}
+
+		return `<Confetti\n  ${params.join("\n  ")}\n/>`;
+	};
+
+	const handleCopyCode = () => {
+		const code = generateCodeSnippet();
+		navigator.clipboard.writeText(code);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
+
 	const handleResetParameters = () => {
 		setNumberOfPieces(DEFAULT_VALUES.numberOfPieces);
 		setGravity(DEFAULT_VALUES.gravity);
@@ -401,9 +426,20 @@ const PlaygroundPage = () => {
 				/>
 			)}
 
-			{/* Bottom: Code snippet */}
-			<div className="fixed bottom-4 left-1/2 -translate-x-1/2">
-				{/* Code and Copy button */}
+			{/* Bottom right: Code snippet */}
+			<div className="fixed bottom-4 right-4 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-w-md">
+				<div className="flex items-start justify-between gap-4">
+					<pre className="flex-1 text-xs text-gray-600 dark:text-gray-400 overflow-x-auto">
+						<code>{generateCodeSnippet()}</code>
+					</pre>
+					<button
+						type="button"
+						onClick={handleCopyCode}
+						className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-orange-100 to-pink-200 text-gray-800 font-semibold rounded hover:from-orange-200 hover:to-pink-300 transition-all whitespace-nowrap"
+					>
+						{copied ? "Copied!" : "Copy Code"}
+					</button>
+				</div>
 			</div>
 		</div>
 	);

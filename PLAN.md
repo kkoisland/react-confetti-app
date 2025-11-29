@@ -281,19 +281,21 @@
       - ラジオボタン「Custom colors (up to 5)」＋カラーピッカー5つ（条件付き表示）
     - Row 5：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び
     - Row 6：コントロールボタン4つ（Stop/Start Confetti, Reset Colors, Reset Parameters, Reset All）横並び
-  - **下部**：コードスニペット表示（水平中央配置、bg-gray-900、z-index高、紙吹雪の上に重なる）
-  - **全体**：紙吹雪が画面全体に降る（showConfettiがtrueの場合のみ）
+  - **右下**：コードスニペット表示（半透明の白背景、紙吹雪が上も降る、リアルタイム更新、Copy Codeボタン付き）
+  - **全体**：紙吹雪が画面全体に降る（showConfettiがtrueの場合のみ、コードスニペットの上も降る）
 
 ### 実装タスク
-- [ ] `/playground` ページの作成
-- [ ] スライダーUIの実装（numberOfPieces, gravity, wind, initialVelocityX, initialVelocityY）
-- [ ] スライダーの隣に現在値を表示
-- [ ] カラーピッカーの実装（3色）
-- [ ] プリセットボタンの実装（第5節の5テーマ）
-- [ ] リセットボタンの実装（デフォルト値に戻す）
-- [ ] コードスニペット表示エリアの実装（下部・水平中央配置、リアルタイム更新）
-- [ ] コピーボタンの実装（クリップボードにコピー、成功時に「コピー済み✓」表示）
-- [ ] 初期状態の紙吹雪表示（デフォルト設定で自動的に降る）
+- [x] `/playground` ページの作成
+- [x] スライダーUIの実装（numberOfPieces, gravity, wind, initialVelocityX, initialVelocityY, friction, opacity）
+- [x] スライダーの隣に現在値とデフォルト値を表示
+- [x] カラーピッカーの実装（5色、デフォルト17色との切り替え）
+- [x] プリセットボタンの実装（第5節の5テーマ）
+- [x] Stop/Start Confettiボタンの実装
+- [x] リセットボタンの実装（Reset Colors, Reset Parameters, Reset All）
+- [x] スライダー調整時の自動再起動（onMouseUp/onTouchEnd）
+- [x] コードスニペット表示エリアの実装（下部・水平中央配置、リアルタイム更新）
+- [x] コピーボタンの実装（クリップボードにコピー、成功時に「Copied!」表示）
+- [x] 初期状態の紙吹雪表示（デフォルト設定で自動的に降る）
 - [ ] ダークモード版の確認・調整
 
 ---
