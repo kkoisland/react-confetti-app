@@ -3,7 +3,7 @@ import Confetti from "react-confetti";
 
 const THEME_SWITCH_DELAY = 100;
 
-const themes = [
+export const themes = [
 	{
 		id: "sakura",
 		name: "Sakura",
