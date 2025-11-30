@@ -2,17 +2,17 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Playground page: Green/Cyan accent colors */
+/* Playground page: Blue to Purple gradient accent colors */
 input[type="radio"]:checked {
-	accent-color: #10b981;
+	accent-color: #818cf8;
 }
 
-/* All sliders: Green track + White thumb with green border */
+/* All sliders: Gradient track + White thumb with gradient border */
 input[type="range"] {
 	-webkit-appearance: none;
 	appearance: none;
 	height: 6px;
-	background: #10b981;
+	background: linear-gradient(90deg, #bfdbfe, #d8b4fe);
 	border-radius: 3px;
 	outline: none;
 	cursor: pointer;
@@ -25,7 +25,7 @@ input[type="range"]::-webkit-slider-thumb {
 	height: 18px;
 	border-radius: 50%;
 	background: white;
-	border: 3px solid #10b981;
+	border: 3px solid #818cf8;
 	cursor: pointer;
 }
 
@@ -34,6 +34,6 @@ input[type="range"]::-moz-range-thumb {
 	height: 18px;
 	border-radius: 50%;
 	background: white;
-	border: 3px solid #10b981;
+	border: 3px solid #818cf8;
 	cursor: pointer;
 }

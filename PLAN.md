@@ -271,18 +271,18 @@
 
 ### デザイン
 - シンプルな白背景（ダークモード時は暗い背景）で紙吹雪を際立たせる
-- **ボタン背景**: `bg-gradient-to-br from-white via-green-100 to-cyan-200`
+- **カラーテーマ**: 青→紫グラデーション（BasicPageと統一）
+  - メインアクションボタン: `from-blue-200 to-purple-300`（ホバー時: `from-blue-400 to-purple-500`）
+  - スライダー: 青→紫グラデーションバー、白つまみ（インディゴ枠）
+  - ラジオボタン: インディゴ
 - **レイアウト**：
-  - **上部**：調整UI（6行構成）
+  - **上部**：調整UI（5行構成、コンパクト化）
     - Row 1：スライダー3つ（numberOfPieces, gravity, wind）横並び（onMouseUp/onTouchEndで自動再起動）
-    - Row 2：スライダー2つ（initialVelocityX, initialVelocityY）横並び（onMouseUp/onTouchEndで自動再起動）
-    - Row 3：スライダー1つ（opacity）横並び（onMouseUp/onTouchEndで自動再起動）※frictionはコメントアウト中
-    - Row 4：カラー選択
-      - ラジオボタン「Use default colors (17 colors)」（デフォルト選択）
-      - ラジオボタン「Custom colors (up to 5)」＋カラーピッカー5つ（条件付き表示）
-    - Row 5：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び
-    - Row 6：コントロールボタン4つ（Stop/Start Confetti, Reset Colors, Reset Parameters, Reset All）横並び
-  - **右下**：コードスニペット表示（半透明の白背景、紙吹雪が上も降る、リアルタイム更新、Copy Codeボタン付き）
+    - Row 2：スライダー3つ（initialVelocityX, initialVelocityY, opacity）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 3：カラー選択（ラジオボタン2つ、カスタム選択時はカラーピッカー5つ表示、折り返し対応）
+    - Row 4：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び、控えめなグレー背景
+    - Row 5：コントロールボタン4つ（Start/Stop Confetti, Reset Colors, Reset Parameters, Reset All）横並び、折り返し対応
+  - **右下**：コードスニペット表示（半透明の白背景、紙吹雪が上も降る、リアルタイム更新、Show All/Changes Onlyトグル、Copy Codeボタン付き）
   - **全体**：紙吹雪が画面全体に降る（showConfettiがtrueの場合のみ、コードスニペットの上も降る）
 
 ### 実装タスク
@@ -294,9 +294,13 @@
 - [x] Stop/Start Confettiボタンの実装
 - [x] リセットボタンの実装（Reset Colors, Reset Parameters, Reset All）
 - [x] スライダー調整時の自動再起動（onMouseUp/onTouchEnd）
-- [x] コードスニペット表示エリアの実装（下部・水平中央配置、リアルタイム更新）
+- [x] コードスニペット表示エリアの実装（右下固定配置、リアルタイム更新）
 - [x] コピーボタンの実装（クリップボードにコピー、成功時に「Copied!」表示）
 - [x] 初期状態の紙吹雪表示（デフォルト設定で自動的に降る）
+- [x] Show All / Changes Onlyトグルの実装
+- [x] スライダーのカスタムスタイリング（青→紫グラデーション）
+- [x] モバイル対応（カラーピッカー・ボタンの折り返し）
+- [x] カラーテーマの統一（BasicPageと同じグラデーション）
 - [ ] ダークモード版の確認・調整
 
 ---

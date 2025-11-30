@@ -385,7 +385,7 @@ const PlaygroundPage = () => {
 					<button
 						type="button"
 						onClick={() => setShowConfetti(!showConfetti)}
-						className="px-3 py-1 text-md bg-gradient-to-r from-green-500 to-cyan-500 text-white rounded font-semibold hover:from-green-600 hover:to-cyan-600 transition-all"
+						className="px-3 py-1 text-md bg-gradient-to-r from-blue-200 to-purple-300 hover:from-blue-400 hover:to-purple-500 text-gray-800 hover:text-white rounded font-semibold transition-all"
 					>
 						{showConfetti ? "Stop Confetti" : "Start Confetti"}
 					</button>
@@ -436,7 +436,7 @@ const PlaygroundPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowAllParameters(false)}
-								className="px-3 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
+								className="px-3 py-1 text-xs bg-gradient-to-r from-blue-200 to-purple-300 hover:from-blue-400 hover:to-purple-500 text-gray-800 hover:text-white font-semibold rounded transition-all whitespace-nowrap"
 							>
 								Changes Only
 							</button>
@@ -444,7 +444,7 @@ const PlaygroundPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowAllParameters(true)}
-								className="px-3 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
+								className="px-3 py-1 text-xs bg-gradient-to-r from-blue-200 to-purple-300 hover:from-blue-400 hover:to-purple-500 text-gray-800 hover:text-white font-semibold rounded transition-all whitespace-nowrap"
 							>
 								Show All
 							</button>
@@ -452,7 +452,7 @@ const PlaygroundPage = () => {
 						<button
 							type="button"
 							onClick={handleCopyCode}
-							className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
+							className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-blue-200 to-purple-300 hover:from-blue-400 hover:to-purple-500 text-gray-800 hover:text-white font-semibold rounded transition-all whitespace-nowrap"
 						>
 							{copied ? "Copied!" : "Copy Code"}
 						</button>
