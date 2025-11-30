@@ -56,7 +56,7 @@ const PlaygroundPage = () => {
 				`wind={${wind}}`,
 				`initialVelocityX={${initialVelocityX}}`,
 				`initialVelocityY={${initialVelocityY}}`,
-				`friction={${friction}}`,
+				// `friction={${friction}}`, // Commented out due to React Confetti library bug
 				`opacity={${opacity}}`,
 				...(useCustomColors && confettiColors && confettiColors.length > 0
 					? [`colors={${JSON.stringify(confettiColors)}}`]
@@ -76,9 +76,9 @@ const PlaygroundPage = () => {
 				...(initialVelocityY !== DEFAULT_VALUES.initialVelocityY
 					? [`initialVelocityY={${initialVelocityY}}`]
 					: []),
-				...(friction !== DEFAULT_VALUES.friction
-					? [`friction={${friction}}`]
-					: []),
+				// ...(friction !== DEFAULT_VALUES.friction
+				// 	? [`friction={${friction}}`]
+				// 	: []),
 				...(opacity !== DEFAULT_VALUES.opacity ? [`opacity={${opacity}}`] : []),
 				...(useCustomColors && confettiColors && confettiColors.length > 0
 					? [`colors={${JSON.stringify(confettiColors)}}`]
@@ -104,7 +104,7 @@ const PlaygroundPage = () => {
 		setWind(DEFAULT_VALUES.wind);
 		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
 		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
-		setFriction(DEFAULT_VALUES.friction);
+		// setFriction(DEFAULT_VALUES.friction); // Commented out - friction slider disabled
 		setOpacity(DEFAULT_VALUES.opacity);
 		restartConfetti();
 	};
@@ -121,7 +121,7 @@ const PlaygroundPage = () => {
 		setWind(DEFAULT_VALUES.wind);
 		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
 		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
-		setFriction(DEFAULT_VALUES.friction);
+		// setFriction(DEFAULT_VALUES.friction); // Commented out - friction slider disabled
 		setOpacity(DEFAULT_VALUES.opacity);
 		setCustomColors(DEFAULT_VALUES.customColors);
 		setUseCustomColors(DEFAULT_VALUES.useCustomColors);
@@ -266,7 +266,8 @@ const PlaygroundPage = () => {
 
 				{/* Row 3 */}
 				<div className="flex gap-4 mb-4">
-					<div className="flex-1">
+					{/* Friction slider - commented out due to React Confetti library bug */}
+					{/* <div className="flex-1">
 						<label
 							htmlFor="friction"
 							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
@@ -285,7 +286,7 @@ const PlaygroundPage = () => {
 							onTouchEnd={restartConfetti}
 							className="w-full"
 						/>
-					</div>
+					</div> */}
 
 					<div className="flex-1">
 						<label
