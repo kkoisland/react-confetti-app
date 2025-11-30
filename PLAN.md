@@ -225,7 +225,7 @@
   - wind（風：-0.1-0.1、刻み幅=0.01）
   - initialVelocityX（横初速：-10-10、刻み幅=1）
   - initialVelocityY（縦初速：-20-0、刻み幅=1）
-  - ~~friction（摩擦係数：0.9-1.0、刻み幅=0.01）~~ ※コメントアウト中（React Confettiライブラリのバグにより粒子が不規則に落下する問題あり）
+  - friction（摩擦係数：0.9-1.0、刻み幅=0.01）
   - opacity（透明度：0-1、刻み幅=0.1）
 - **カラー選択**：
   - ラジオボタン：「Use default colors (17 colors)」または「Custom colors (up to 5)」
@@ -276,12 +276,13 @@
   - スライダー: 青→紫グラデーションバー、白つまみ（インディゴ枠）
   - ラジオボタン: インディゴ
 - **レイアウト**：
-  - **上部**：調整UI（5行構成、コンパクト化）
+  - **上部**：調整UI（6行構成）
     - Row 1：スライダー3つ（numberOfPieces, gravity, wind）横並び（onMouseUp/onTouchEndで自動再起動）
-    - Row 2：スライダー3つ（initialVelocityX, initialVelocityY, opacity）横並び（onMouseUp/onTouchEndで自動再起動）
-    - Row 3：カラー選択（ラジオボタン2つ、カスタム選択時はカラーピッカー5つ表示、折り返し対応）
-    - Row 4：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び、控えめなグレー背景
-    - Row 5：コントロールボタン4つ（Start/Stop Confetti, Reset Colors, Reset Parameters, Reset All）横並び、折り返し対応
+    - Row 2：スライダー2つ（initialVelocityX, initialVelocityY）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 3：スライダー2つ（friction, opacity）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 4：カラー選択（ラジオボタン2つ、カスタム選択時はカラーピッカー5つ表示、折り返し対応）
+    - Row 5：プリセットボタン5つ（桜、雪、紅葉、星、クリスマス）横並び、控えめなグレー背景
+    - Row 6：コントロールボタン4つ（Start/Stop Confetti, Reset Colors, Reset Parameters, Reset All）横並び、折り返し対応
   - **右下**：コードスニペット表示（半透明の白背景、紙吹雪が上も降る、リアルタイム更新、Show All/Changes Onlyトグル、Copy Codeボタン付き）
   - **全体**：紙吹雪が画面全体に降る（showConfettiがtrueの場合のみ、コードスニペットの上も降る）
 
