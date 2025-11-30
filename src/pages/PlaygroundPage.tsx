@@ -56,7 +56,7 @@ const PlaygroundPage = () => {
 				`wind={${wind}}`,
 				`initialVelocityX={${initialVelocityX}}`,
 				`initialVelocityY={${initialVelocityY}}`,
-				// `friction={${friction}}`, // Commented out due to React Confetti library bug
+				`friction={${friction}}`,
 				`opacity={${opacity}}`,
 				...(useCustomColors && confettiColors && confettiColors.length > 0
 					? [`colors={${JSON.stringify(confettiColors)}}`]
@@ -76,9 +76,9 @@ const PlaygroundPage = () => {
 				...(initialVelocityY !== DEFAULT_VALUES.initialVelocityY
 					? [`initialVelocityY={${initialVelocityY}}`]
 					: []),
-				// ...(friction !== DEFAULT_VALUES.friction
-				// 	? [`friction={${friction}}`]
-				// 	: []),
+				...(friction !== DEFAULT_VALUES.friction
+					? [`friction={${friction}}`]
+					: []),
 				...(opacity !== DEFAULT_VALUES.opacity ? [`opacity={${opacity}}`] : []),
 				...(useCustomColors && confettiColors && confettiColors.length > 0
 					? [`colors={${JSON.stringify(confettiColors)}}`]
@@ -104,7 +104,7 @@ const PlaygroundPage = () => {
 		setWind(DEFAULT_VALUES.wind);
 		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
 		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
-		// setFriction(DEFAULT_VALUES.friction); // Commented out - friction slider disabled
+		setFriction(DEFAULT_VALUES.friction);
 		setOpacity(DEFAULT_VALUES.opacity);
 		restartConfetti();
 	};
@@ -121,7 +121,7 @@ const PlaygroundPage = () => {
 		setWind(DEFAULT_VALUES.wind);
 		setInitialVelocityX(DEFAULT_VALUES.initialVelocityX);
 		setInitialVelocityY(DEFAULT_VALUES.initialVelocityY);
-		// setFriction(DEFAULT_VALUES.friction); // Commented out - friction slider disabled
+		setFriction(DEFAULT_VALUES.friction);
 		setOpacity(DEFAULT_VALUES.opacity);
 		setCustomColors(DEFAULT_VALUES.customColors);
 		setUseCustomColors(DEFAULT_VALUES.useCustomColors);
@@ -219,7 +219,7 @@ const PlaygroundPage = () => {
 						/>
 					</div>
 				</div>
-				{/* Row 2: 3 sliders */}
+				{/* Row 2: 2 sliders */}
 				<div className="flex gap-3 mb-3">
 					<div className="flex-1">
 						<label
@@ -262,6 +262,30 @@ const PlaygroundPage = () => {
 							className="w-full"
 						/>
 					</div>
+				</div>
+
+				{/* Row 3: 2 sliders */}
+				<div className="flex gap-3 mb-3">
+					<div className="flex-1">
+						<label
+							htmlFor="friction"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
+						>
+							Friction: {friction} (default: 0.99)
+						</label>
+						<input
+							id="friction"
+							type="range"
+							min="0.9"
+							max="1.0"
+							step="0.01"
+							value={friction}
+							onChange={(e) => setFriction(Number(e.target.value))}
+							onMouseUp={restartConfetti}
+							onTouchEnd={restartConfetti}
+							className="w-full"
+						/>
+					</div>
 
 					<div className="flex-1">
 						<label
@@ -284,7 +308,7 @@ const PlaygroundPage = () => {
 						/>
 					</div>
 				</div>
-				{/* Row 3: Colors */}
+				{/* Row 4: Colors */}
 				<div className="mb-3">
 					<div className="mb-2">
 						<div className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300">
@@ -361,7 +385,7 @@ const PlaygroundPage = () => {
 						</div>
 					)}
 				</div>
-				{/* Row 4: Preset buttons */}
+				{/* Row 5: Preset buttons */}
 				<div className="mb-3">
 					<div className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300">
 						Preset Themes:
@@ -380,7 +404,7 @@ const PlaygroundPage = () => {
 					</div>
 				</div>
 
-				{/* Row 5: Control buttons */}
+				{/* Row 6: Control buttons */}
 				<div className="flex flex-wrap gap-1.5">
 					<button
 						type="button"
