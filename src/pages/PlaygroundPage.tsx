@@ -354,7 +354,7 @@ const PlaygroundPage = () => {
 
 					{useCustomColors && (
 						<div className="flex flex-col gap-2">
-							<div className="flex gap-2 items-center">
+							<div className="flex flex-wrap gap-2 items-center">
 								{customColors.map((color, index) => (
 									<div
 										key={`${index}-${color}`}
@@ -410,7 +410,7 @@ const PlaygroundPage = () => {
 				</div>
 
 				{/* Row 6: Control buttons */}
-				<div className="flex gap-2">
+				<div className="flex flex-wrap gap-2">
 					<button
 						type="button"
 						onClick={() => setShowConfetti(!showConfetti)}
