@@ -1,3 +1,39 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Playground page: Green/Cyan accent colors */
+input[type="radio"]:checked {
+	accent-color: #10b981;
+}
+
+/* All sliders: Green track + White thumb with green border */
+input[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 6px;
+	background: #10b981;
+	border-radius: 3px;
+	outline: none;
+	cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: white;
+	border: 3px solid #10b981;
+	cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: white;
+	border: 3px solid #10b981;
+	cursor: pointer;
+}

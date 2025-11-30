@@ -155,13 +155,13 @@ const PlaygroundPage = () => {
 	return (
 		<div className="flex flex-col h-full">
 			{/* Controls */}
-			<div className="p-4">
-				{/* Row 1 */}
-				<div className="flex gap-4 mb-4">
+			<div className="p-3">
+				{/* Row 1: 3 sliders */}
+				<div className="flex gap-3 mb-3">
 					<div className="flex-1">
 						<label
 							htmlFor="numberOfPieces"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Number of Pieces: {numberOfPieces} (default: 200)
 						</label>
@@ -181,7 +181,7 @@ const PlaygroundPage = () => {
 					<div className="flex-1">
 						<label
 							htmlFor="gravity"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Gravity: {gravity} (default: 0.1)
 						</label>
@@ -201,7 +201,7 @@ const PlaygroundPage = () => {
 					<div className="flex-1">
 						<label
 							htmlFor="wind"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Wind: {wind} (default: 0)
 						</label>
@@ -219,12 +219,12 @@ const PlaygroundPage = () => {
 						/>
 					</div>
 				</div>
-				{/* Row 2 */}
-				<div className="flex gap-4 mb-4">
+				{/* Row 2: 3 sliders */}
+				<div className="flex gap-3 mb-3">
 					<div className="flex-1">
 						<label
 							htmlFor="initialVelocityX"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Initial Velocity X: {initialVelocityX} (default: 0)
 						</label>
@@ -245,7 +245,7 @@ const PlaygroundPage = () => {
 					<div className="flex-1">
 						<label
 							htmlFor="initialVelocityY"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Initial Velocity Y: {initialVelocityY} (default: 0)
 						</label>
@@ -262,36 +262,11 @@ const PlaygroundPage = () => {
 							className="w-full"
 						/>
 					</div>
-				</div>
-
-				{/* Row 3 */}
-				<div className="flex gap-4 mb-4">
-					{/* Friction slider - commented out due to React Confetti library bug */}
-					{/* <div className="flex-1">
-						<label
-							htmlFor="friction"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
-						>
-							Friction: {friction} (default: 0.99)
-						</label>
-						<input
-							id="friction"
-							type="range"
-							min="0.9"
-							max="1.0"
-							step="0.01"
-							value={friction}
-							onChange={(e) => setFriction(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div> */}
 
 					<div className="flex-1">
 						<label
 							htmlFor="opacity"
-							className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300"
+							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
 							Opacity: {opacity} (default: 1)
 						</label>
@@ -309,13 +284,13 @@ const PlaygroundPage = () => {
 						/>
 					</div>
 				</div>
-				{/* Row 4: Colors */}
-				<div className="mb-4">
-					<div className="mb-3">
-						<div className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+				{/* Row 3: Colors */}
+				<div className="mb-3">
+					<div className="mb-2">
+						<div className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300">
 							Colors:
 						</div>
-						<div className="flex gap-4">
+						<div className="flex gap-3">
 							<div className="flex items-center">
 								<input
 									id="defaultColors"
@@ -327,7 +302,7 @@ const PlaygroundPage = () => {
 								/>
 								<label
 									htmlFor="defaultColors"
-									className="text-sm text-gray-700 dark:text-gray-300"
+									className="text-base text-gray-700 dark:text-gray-300"
 								>
 									Use default colors (17 colors)
 								</label>
@@ -344,7 +319,7 @@ const PlaygroundPage = () => {
 								/>
 								<label
 									htmlFor="customColors"
-									className="text-sm text-gray-700 dark:text-gray-300"
+									className="text-base text-gray-700 dark:text-gray-300"
 								>
 									Custom colors (up to 5)
 								</label>
@@ -353,55 +328,51 @@ const PlaygroundPage = () => {
 					</div>
 
 					{useCustomColors && (
-						<div className="flex flex-col gap-2">
-							<div className="flex flex-wrap gap-2 items-center">
-								{customColors.map((color, index) => (
-									<div
-										key={`${index}-${color}`}
-										className="flex flex-col gap-1"
-									>
-										<input
-											type="color"
-											value={color || "#000000"}
-											onChange={(e) => {
-												const newColors = [...customColors];
-												newColors[index] = e.target.value;
-												setCustomColors(newColors);
-											}}
-											className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
-										/>
-										<input
-											type="text"
-											value={color}
-											placeholder="#000000"
-											onChange={(e) => {
-												const newColors = [...customColors];
-												let value = e.target.value;
-												if (value && !value?.startsWith("#")) {
-													value = `#${value}`;
-												}
-												newColors[index] = value;
-												setCustomColors(newColors);
-											}}
-											className="w-20 px-1 py-1 text-xs border border-gray-300 rounded dark:bg-gray-700 dark:text-gray-200"
-										/>
-									</div>
-								))}
-							</div>
+						<div className="flex flex-wrap gap-2 items-center">
+							{customColors.map((color, index) => (
+								<div key={`${index}-${color}`} className="flex flex-col gap-1">
+									<input
+										type="color"
+										value={color || "#000000"}
+										onChange={(e) => {
+											const newColors = [...customColors];
+											newColors[index] = e.target.value;
+											setCustomColors(newColors);
+										}}
+										className="w-8 h-8 border border-gray-300 rounded cursor-pointer"
+									/>
+									<input
+										type="text"
+										value={color}
+										placeholder="#000000"
+										onChange={(e) => {
+											const newColors = [...customColors];
+											let value = e.target.value;
+											if (value && !value?.startsWith("#")) {
+												value = `#${value}`;
+											}
+											newColors[index] = value;
+											setCustomColors(newColors);
+										}}
+										className="w-16 px-1 py-0.5 text-xs border border-gray-300 rounded dark:bg-gray-700 dark:text-gray-200"
+									/>
+								</div>
+							))}
 						</div>
 					)}
 				</div>
-				{/* Row 5: Preset buttons */}
-				<div className="mb-4">
-					<div className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+				{/* Row 4: Preset buttons */}
+				<div className="mb-3">
+					<div className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300">
 						Preset Themes:
 					</div>
-					<div className="flex flex-wrap gap-2">
+					<div className="flex flex-wrap gap-1.5">
 						{themes.map((theme, index) => (
 							<button
 								key={theme.id}
 								type="button"
 								onClick={() => handlePreset(index)}
+								className="px-2 py-1 text-base bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
 							>
 								{theme.emoji} {theme.name}
 							</button>
@@ -409,33 +380,33 @@ const PlaygroundPage = () => {
 					</div>
 				</div>
 
-				{/* Row 6: Control buttons */}
-				<div className="flex flex-wrap gap-2">
+				{/* Row 5: Control buttons */}
+				<div className="flex flex-wrap gap-1.5">
 					<button
 						type="button"
 						onClick={() => setShowConfetti(!showConfetti)}
-						className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded font-semibold hover:bg-blue-600 dark:hover:bg-blue-700 transition-all"
+						className="px-3 py-1 text-md bg-gradient-to-r from-green-500 to-cyan-500 text-white rounded font-semibold hover:from-green-600 hover:to-cyan-600 transition-all"
 					>
 						{showConfetti ? "Stop Confetti" : "Start Confetti"}
 					</button>
 					<button
 						type="button"
 						onClick={handleResetColors}
-						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+						className="px-3 py-1 text-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
 					>
 						Reset Colors
 					</button>
 					<button
 						type="button"
 						onClick={handleResetParameters}
-						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+						className="px-3 py-1 text-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
 					>
 						Reset Parameters
 					</button>
 					<button
 						type="button"
 						onClick={handleResetAll}
-						className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+						className="px-3 py-1 text-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
 					>
 						Reset All
 					</button>
@@ -465,7 +436,7 @@ const PlaygroundPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowAllParameters(false)}
-								className="px-3 py-1 text-xs bg-gradient-to-r from-orange-100 to-pink-200 text-gray-800 font-semibold rounded hover:from-orange-200 hover:to-pink-300 transition-all whitespace-nowrap"
+								className="px-3 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
 							>
 								Changes Only
 							</button>
@@ -473,7 +444,7 @@ const PlaygroundPage = () => {
 							<button
 								type="button"
 								onClick={() => setShowAllParameters(true)}
-								className="px-3 py-1 text-xs bg-gradient-to-r from-orange-100 to-pink-200 text-gray-800 font-semibold rounded hover:from-orange-200 hover:to-pink-300 transition-all whitespace-nowrap"
+								className="px-3 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
 							>
 								Show All
 							</button>
@@ -481,7 +452,7 @@ const PlaygroundPage = () => {
 						<button
 							type="button"
 							onClick={handleCopyCode}
-							className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-orange-100 to-pink-200 text-gray-800 font-semibold rounded hover:from-orange-200 hover:to-pink-300 transition-all whitespace-nowrap"
+							className="w-20 px-2 py-1 text-xs bg-gradient-to-r from-green-100 to-cyan-100 dark:from-green-900 dark:to-cyan-900 text-gray-800 dark:text-gray-200 font-semibold rounded hover:from-green-200 hover:to-cyan-200 dark:hover:from-green-800 dark:hover:to-cyan-800 transition-all whitespace-nowrap"
 						>
 							{copied ? "Copied!" : "Copy Code"}
 						</button>
