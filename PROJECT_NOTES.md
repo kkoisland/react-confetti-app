@@ -636,7 +636,8 @@ pnpm exec biome lint --write <files>
    - ライトモードで見えにくいが、description に "(dark mode recommended)" で明記
 
 2. **コミット方針**
-   - Claude Codeはコミットを実行しない（ユーザーが必ず実行）
+   - **重要**: Claude Codeはコミットを実行してはならない（ユーザーが必ず自分で実行）
+   - コミットメッセージの提案のみ可（実行は絶対にしない）
 
 3. **記事執筆場所**
    - `/Users/keiko/Code/github/react-tokyo-book/src/chapter_kkoisland_2/` に執筆
@@ -782,4 +783,25 @@ pnpm exec biome lint --write <files>
    - スクロール処理
 
 ---
-最終更新: 2025-11-28 (セッション 15完了 - Playground Page 実装開始)
+
+## 既知の問題
+
+### React Confetti - Friction パラメータのバグ
+
+**問題:**
+`friction`パラメータを使用すると、紙吹雪の粒子が不規則に落下する問題が発生します。
+- 症状: 粒子がまとまって落ちる、途切れる、不規則な動きをする
+- 発生条件: `friction`パラメータを設定した場合（静的な値でも動的な変更でも発生）
+- 調査結果: React ConfettiライブラリのGitHub issuesには関連する報告なし（2025-11-29時点）
+
+**対応:**
+- Playgroundページの`friction`スライダーをコメントアウト
+- コードスニペット生成からも除外
+- 今後、削除するか残すかは別途判断
+
+**影響範囲:**
+- `/playground`ページ: frictionスライダーが非表示
+- SeasonalPageなど他のページ: frictionパラメータを使用していないため影響なし
+
+---
+最終更新: 2025-11-29 (セッション 16 - Playground Page完成、frictionバグ対応)

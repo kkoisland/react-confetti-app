@@ -225,7 +225,7 @@
   - wind（風：-0.1-0.1、刻み幅=0.01）
   - initialVelocityX（横初速：-10-10、刻み幅=1）
   - initialVelocityY（縦初速：-20-0、刻み幅=1）
-  - friction（摩擦係数：0.9-1.0、刻み幅=0.01）
+  - ~~friction（摩擦係数：0.9-1.0、刻み幅=0.01）~~ ※コメントアウト中（React Confettiライブラリのバグにより粒子が不規則に落下する問題あり）
   - opacity（透明度：0-1、刻み幅=0.1）
 - **カラー選択**：
   - ラジオボタン：「Use default colors (17 colors)」または「Custom colors (up to 5)」
@@ -276,7 +276,7 @@
   - **上部**：調整UI（6行構成）
     - Row 1：スライダー3つ（numberOfPieces, gravity, wind）横並び（onMouseUp/onTouchEndで自動再起動）
     - Row 2：スライダー2つ（initialVelocityX, initialVelocityY）横並び（onMouseUp/onTouchEndで自動再起動）
-    - Row 3：スライダー2つ（friction, opacity）横並び（onMouseUp/onTouchEndで自動再起動）
+    - Row 3：スライダー1つ（opacity）横並び（onMouseUp/onTouchEndで自動再起動）※frictionはコメントアウト中
     - Row 4：カラー選択
       - ラジオボタン「Use default colors (17 colors)」（デフォルト選択）
       - ラジオボタン「Custom colors (up to 5)」＋カラーピッカー5つ（条件付き表示）
