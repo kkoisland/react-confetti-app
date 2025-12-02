@@ -10,11 +10,14 @@
 ## 技術仕様（簡潔版）
 
 **技術スタック**:
-- React 19.x + TypeScript 5.9.x + Vite
-- Tailwind CSS（スタイリング）
-- React Router v6（ルーティング）
-- react-confetti（紙吹雪ライブラリ）
-- Biome（リンター/フォーマッター）
+- Node.js: 22.21.1
+- React: 19.2.0
+- TypeScript: 5.9.3
+- Vite: 7.2.2
+- Tailwind CSS: 4.1.17（スタイリング）
+- React Router: 7.9.6（ルーティング）
+- react-confetti: 6.4.0（紙吹雪ライブラリ）
+- Biome: 2.3.5（リンター/フォーマッター）
 
 **ルート構造**:
 ```

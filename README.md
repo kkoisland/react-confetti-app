@@ -1,18 +1,22 @@
 # React Confetti Sample App
 
-A collection of interactive examples demonstrating various use cases of the [react-confetti](https://github.com/alampros/react-confetti/) library. Designed for learning and exploring confetti effects in React applications.
+A collection of interactive examples demonstrating various use cases of the [react-confetti](https://github.com/alampros/react-confetti/) library. This project serves as a reference implementation for a Japanese React tutorial book.
+
+<!-- 🌐 **Live Demo:** https://kkoisland.github.io/react-confetti-app/ -->
 
 ## Setup
 
 Clone the repository, install dependencies, and start the development server:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kkoisland/react-confetti-app.git
 cd react-confetti-app
-nvm use
+nvm use  # Uses Node.js v22.21.1 specified in .nvmrc
 pnpm install
 pnpm dev
 ```
+
+Open `http://localhost:5173` in your browser.
 
 ## Features
 
@@ -38,12 +42,14 @@ pnpm dev
 
 ## Tech Stack
 
-- Vite (Development environment and build tool)
-- React 19 (Functional Components)
-- TypeScript (Type-safe development)
-- Tailwind CSS v4 (Styling with modern features)
-- React Router v7 (Client-side routing)
-- Biome (Code linting and formatting)
+- **Node.js**: 22.21.1
+- **React**: 19.2.0
+- **TypeScript**: 5.9.3
+- **Vite**: 7.2.2
+- **Tailwind CSS**: 4.1.17
+- **React Router**: 7.9.6
+- **react-confetti**: 6.4.0
+- **Biome**: 2.3.5 (Code linting and formatting)
 
 ## Project Structure
 
