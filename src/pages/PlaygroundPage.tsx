@@ -6,8 +6,8 @@ const DEFAULT_VALUES = {
 	numberOfPieces: 200,
 	gravity: 0.1,
 	wind: 0,
-	initialVelocityX: 0,
-	initialVelocityY: 0,
+	initialVelocityX: 4,
+	initialVelocityY: 10,
 	friction: 0.99,
 	opacity: 1,
 	useCustomColors: false,
@@ -19,8 +19,8 @@ const PlaygroundPage = () => {
 	const [numberOfPieces, setNumberOfPieces] = useState(200);
 	const [gravity, setGravity] = useState(0.1);
 	const [wind, setWind] = useState(0);
-	const [initialVelocityX, setInitialVelocityX] = useState(0);
-	const [initialVelocityY, setInitialVelocityY] = useState(0);
+	const [initialVelocityX, setInitialVelocityX] = useState(4);
+	const [initialVelocityY, setInitialVelocityY] = useState(10);
 	const [friction, setFriction] = useState(0.99);
 	const [opacity, setOpacity] = useState(1);
 	const [useCustomColors, setUseCustomColors] = useState(false);
@@ -226,7 +226,7 @@ const PlaygroundPage = () => {
 							htmlFor="initialVelocityX"
 							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
-							Initial Velocity X: {initialVelocityX} (default: 0)
+							Initial Velocity X: {initialVelocityX} (default: 4)
 						</label>
 						<input
 							id="initialVelocityX"
@@ -247,7 +247,7 @@ const PlaygroundPage = () => {
 							htmlFor="initialVelocityY"
 							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
 						>
-							Initial Velocity Y: {initialVelocityY} (default: 0)
+							Initial Velocity Y: {initialVelocityY} (default: 10)
 						</label>
 						<input
 							id="initialVelocityY"
