@@ -253,7 +253,7 @@ const PlaygroundPage = () => {
 							id="initialVelocityY"
 							type="range"
 							min="-20"
-							max="0"
+							max="20"
 							step="1"
 							value={initialVelocityY}
 							onChange={(e) => setInitialVelocityY(Number(e.target.value))}

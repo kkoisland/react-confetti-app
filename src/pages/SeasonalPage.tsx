@@ -13,7 +13,7 @@ export const themes = [
 		numberOfPieces: 100,
 		gravity: 0.02,
 		wind: 0.01,
-		initialVelocityY: -2,
+		initialVelocityY: -3,
 	},
 	{
 		id: "snow",
@@ -23,6 +23,7 @@ export const themes = [
 		colors: ["#FFFFFF", "#E0F2F7"],
 		numberOfPieces: 300,
 		gravity: 0.01,
+		initialVelocityY: -7,
 	},
 	{
 		id: "koyo",
