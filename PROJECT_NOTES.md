@@ -866,4 +866,66 @@ pnpm exec biome lint --write <files>
    - コミットメッセージの提案のみ可
 
 ---
-最終更新: 2025-11-30 (セッション 17 - Playground Pageスタイリング完成)
+
+### 2025-12-03 - セッション 18: ナビゲーション改善とスタイル定数化
+
+#### 完了した作業
+
+1. **ナビゲーションホバー色の改善**
+   - 変更前: `hover:text-indigo-900`
+   - 変更後: `hover:text-indigo-600 dark:hover:text-indigo-300`
+   - 理由: ダークモードで`indigo-900`はほぼ見えなくなる問題を解決
+   - 適用箇所: ロゴ、デスクトップナビ、モバイルメニューボタン、モバイルナビ
+
+2. **アクティブページ表示の実装**
+   - `Link`を`NavLink`に変更
+   - `NavLink`の`isActive`プロパティで現在のページを判定
+   - アクティブ時のスタイル:
+     - デスクトップ: indigo色 + 太字 + 下ボーダー（`border-b-2`）
+     - モバイル: indigo色 + 太字 + 左ボーダー（`border-l-4`）
+
+3. **スタイル定数の導入**
+   - `NAV_ACTIVE_STYLES`: `text-indigo-600 dark:text-indigo-300 font-bold`
+   - `NAV_HOVER_STYLES`: `hover:text-indigo-600 dark:hover:text-indigo-300`
+   - `NAV_BORDER_BOTTOM`: `border-b-2 border-indigo-600 dark:border-indigo-300`
+   - `NAV_BORDER_LEFT`: `border-l-4 border-indigo-600 dark:border-indigo-300`
+   - メリット: 1箇所での色管理、保守性向上、重複排除
+
+4. **Playgroundページ改善**
+   - Gravityのstep: `0.01` → `0.001`
+   - 理由: starテーマの`0.0005`に近い微細な値を試せるように
+   - これにより「ほぼ止まる」演出がPlaygroundで再現可能に
+
+#### 技術的な学び
+
+1. **NavLinkの仕組み**
+   - React Routerの特別なLinkコンポーネント
+   - `className`に関数を渡して`isActive`を受け取る
+   - 現在のページかどうかを自動判定
+   - ナビゲーションUIでの標準パターン
+
+2. **Tailwind Borderの活用**
+   - `border-b-2`: 下ボーダー（デスクトップの横並びナビ用）
+   - `border-l-4`: 左ボーダー（モバイルの縦並びナビ用）
+   - `text-decoration: underline`よりも柔軟（太さ、色、位置調整可能）
+
+3. **定数管理のベストプラクティス**
+   - コンポーネント外で定数定義（再レンダリング時の無駄な生成を防ぐ）
+   - 命名規則: `NAV_*`で用途を明確化
+   - テンプレートリテラルで組み合わせ可能
+
+#### デザイン決定
+
+1. **ナビゲーション色の段階的変化**
+   - 通常: `text-gray-800 dark:text-gray-200`
+   - ホバー: `text-indigo-600 dark:text-indigo-300`
+   - アクティブ: `text-indigo-600 dark:text-indigo-300 + border`
+   - ライト/ダーク両モードで視認性を確保
+
+2. **アンダーライン vs ボーダー**
+   - `underline`ではなく`border`を採用
+   - 理由: 太さ、色、位置の細かい制御が可能
+   - デザイン的にも洗練された印象
+
+---
+最終更新: 2025-12-03 (セッション 18 - ナビゲーション改善とスタイル定数化)
