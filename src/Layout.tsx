@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 const NAV_ACTIVE_STYLES = "text-indigo-600 dark:text-indigo-300 font-bold";
-const NAV_HOVER_STYLES = "hover:text-indigo-600 dark:hover:text-indigo-300";
+export const NAV_HOVER_STYLES =
+	"hover:text-indigo-600 dark:hover:text-indigo-300";
 
 const Layout = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);

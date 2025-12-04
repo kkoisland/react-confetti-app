@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Confetti from "react-confetti";
+import { NAV_HOVER_STYLES } from "../Layout";
 import { themes } from "./SeasonalPage";
 
 const DEFAULT_VALUES = {
@@ -12,6 +13,66 @@ const DEFAULT_VALUES = {
 	opacity: 1,
 	useCustomColors: false,
 	customColors: ["#FF0000", "#00FF00", "#0000FF", "", ""],
+};
+
+type ParameterSliderProps = {
+	id: string;
+	label: string;
+	value: number;
+	defaultValue: number;
+	min: number;
+	max: number;
+	step: number;
+	onChange: (value: number) => void;
+	onReset: () => void;
+};
+
+const ParameterSlider = ({
+	id,
+	label,
+	value,
+	defaultValue,
+	min,
+	max,
+	step,
+	onChange,
+	onReset,
+}: ParameterSliderProps) => {
+	return (
+		<div className="flex-1">
+			<div className="flex items-center mb-1">
+				<label
+					htmlFor={id}
+					className="text-base font-medium text-gray-700 dark:text-gray-300"
+				>
+					{label}: {value} (default: {defaultValue})
+				</label>
+				<button
+					type="button"
+					onClick={() => {
+						onChange(defaultValue);
+						onReset();
+					}}
+					className={`ml-2 text-sm px-1.5 py-0.5 rounded ${NAV_HOVER_STYLES}`}
+					title="Reset to default"
+				>
+					↺
+				</button>
+			</div>
+			<input
+				id={id}
+				type="range"
+				min={min}
+				max={max}
+				step={step}
+				value={value}
+				onChange={(e) => onChange(Number(e.target.value))}
+				onMouseUp={onReset}
+				onTouchEnd={onReset}
+				className="w-full"
+			/>
+		</div>
+	);
 };
 
 const PlaygroundPage = () => {
@@ -34,7 +95,7 @@ const PlaygroundPage = () => {
 
 	const [copied, setCopied] = useState(false);
 	const [showConfetti, setShowConfetti] = useState(true);
-	const [showAllParameters, setShowAllParameters] = useState(true);
+	const [showAllParameters, setShowAllParameters] = useState(false);
 
 	const confettiColors = useCustomColors
 		? customColors.filter((c) => c !== "")
@@ -158,155 +219,90 @@ const PlaygroundPage = () => {
 			<div className="p-3">
 				{/* Row 1: 3 sliders */}
 				<div className="flex gap-3 mb-3">
-					<div className="flex-1">
-						<label
-							htmlFor="numberOfPieces"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Number of Pieces: {numberOfPieces} (default: 200)
-						</label>
-						<input
-							id="numberOfPieces"
-							type="range"
-							min="50"
-							max="500"
-							step="10"
-							value={numberOfPieces}
-							onChange={(e) => setNumberOfPieces(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
-					<div className="flex-1">
-						<label
-							htmlFor="gravity"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Gravity: {gravity} (default: 0.1)
-						</label>
-						<input
-							id="gravity"
-							type="range"
-							min="0"
-							max="0.3"
-							step="0.001"
-							value={gravity}
-							onChange={(e) => setGravity(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
-					<div className="flex-1">
-						<label
-							htmlFor="wind"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Wind: {wind} (default: 0)
-						</label>
-						<input
-							id="wind"
-							type="range"
-							min="-0.1"
-							max="0.1"
-							step="0.01"
-							value={wind}
-							onChange={(e) => setWind(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
+					<ParameterSlider
+						id="numberOfPieces"
+						label="Number of Pieces"
+						value={numberOfPieces}
+						defaultValue={DEFAULT_VALUES.numberOfPieces}
+						min={50}
+						max={500}
+						step={10}
+						onChange={setNumberOfPieces}
+						onReset={restartConfetti}
+					/>
+					<ParameterSlider
+						id="gravity"
+						label="Gravity"
+						value={gravity}
+						defaultValue={DEFAULT_VALUES.gravity}
+						min={0}
+						max={0.3}
+						step={0.001}
+						onChange={setGravity}
+						onReset={restartConfetti}
+					/>
+					<ParameterSlider
+						id="wind"
+						label="Wind"
+						value={wind}
+						defaultValue={DEFAULT_VALUES.wind}
+						min={-0.1}
+						max={0.1}
+						step={0.01}
+						onChange={setWind}
+						onReset={restartConfetti}
+					/>
 				</div>
 				{/* Row 2: 2 sliders */}
 				<div className="flex gap-3 mb-3">
-					<div className="flex-1">
-						<label
-							htmlFor="initialVelocityX"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Initial Velocity X: {initialVelocityX} (default: 4)
-						</label>
-						<input
-							id="initialVelocityX"
-							type="range"
-							min="-10"
-							max="10"
-							step="1"
-							value={initialVelocityX}
-							onChange={(e) => setInitialVelocityX(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
-
-					<div className="flex-1">
-						<label
-							htmlFor="initialVelocityY"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Initial Velocity Y: {initialVelocityY} (default: 10)
-						</label>
-						<input
-							id="initialVelocityY"
-							type="range"
-							min="-20"
-							max="20"
-							step="1"
-							value={initialVelocityY}
-							onChange={(e) => setInitialVelocityY(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
+					<ParameterSlider
+						id="initialVelocityX"
+						label="Initial Velocity X"
+						value={initialVelocityX}
+						defaultValue={DEFAULT_VALUES.initialVelocityX}
+						min={-10}
+						max={10}
+						step={1}
+						onChange={setInitialVelocityX}
+						onReset={restartConfetti}
+					/>
+					<ParameterSlider
+						id="initialVelocityY"
+						label="Initial Velocity Y"
+						value={initialVelocityY}
+						defaultValue={DEFAULT_VALUES.initialVelocityY}
+						min={-20}
+						max={20}
+						step={1}
+						onChange={setInitialVelocityY}
+						onReset={restartConfetti}
+					/>
 				</div>
 
 				{/* Row 3: 2 sliders */}
 				<div className="flex gap-3 mb-3">
-					<div className="flex-1">
-						<label
-							htmlFor="friction"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Friction: {friction} (default: 0.99)
-						</label>
-						<input
-							id="friction"
-							type="range"
-							min="0.9"
-							max="1.0"
-							step="0.01"
-							value={friction}
-							onChange={(e) => setFriction(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
-
-					<div className="flex-1">
-						<label
-							htmlFor="opacity"
-							className="block text-base font-medium mb-1 text-gray-700 dark:text-gray-300"
-						>
-							Opacity: {opacity} (default: 1)
-						</label>
-						<input
-							id="opacity"
-							type="range"
-							min="0"
-							max="1"
-							step="0.1"
-							value={opacity}
-							onChange={(e) => setOpacity(Number(e.target.value))}
-							onMouseUp={restartConfetti}
-							onTouchEnd={restartConfetti}
-							className="w-full"
-						/>
-					</div>
+					<ParameterSlider
+						id="friction"
+						label="Friction"
+						value={friction}
+						defaultValue={DEFAULT_VALUES.friction}
+						min={0.9}
+						max={1.0}
+						step={0.01}
+						onChange={setFriction}
+						onReset={restartConfetti}
+					/>
+					<ParameterSlider
+						id="opacity"
+						label="Opacity"
+						value={opacity}
+						defaultValue={DEFAULT_VALUES.opacity}
+						min={0}
+						max={1}
+						step={0.1}
+						onChange={setOpacity}
+						onReset={restartConfetti}
+					/>
 				</div>
 				{/* Row 4: Colors */}
 				<div className="mb-3">
@@ -425,7 +421,7 @@ const PlaygroundPage = () => {
 						onClick={handleResetParameters}
 						className="px-3 py-1 text-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
 					>
-						Reset Parameters
+						Reset Sliders
 					</button>
 					<button
 						type="button"
