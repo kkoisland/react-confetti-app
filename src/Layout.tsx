@@ -102,6 +102,32 @@ const Layout = () => {
 			<main className="flex-grow">
 				<Outlet />
 			</main>
+
+			<footer className="py-4 px-4 text-center text-sm text-gray-600 dark:text-gray-400">
+				<div className="flex flex-col gap-2">
+					<div>
+						React Confetti Sample App by kkoisland (Keiko) | Built with{" "}
+						<a
+							href="https://github.com/alampros/react-confetti"
+							target="_blank"
+							rel="noopener noreferrer"
+							className={`underline ${NAV_HOVER_STYLES}`}
+						>
+							react-confetti
+						</a>
+					</div>
+					<div>
+						<a
+							href="https://github.com/kkoisland/react-confetti-app"
+							target="_blank"
+							rel="noopener noreferrer"
+							className={`underline ${NAV_HOVER_STYLES}`}
+						>
+							View Source on GitHub
+						</a>
+					</div>
+				</div>
+			</footer>
 		</div>
 	);
 };

@@ -62,7 +62,14 @@ react-confetti-app/
 │   └── extensions.json
 ├── public/
 ├── src/
+│   ├── pages/
+│   │   ├── BasicPage.tsx
+│   │   ├── CountdownPage.tsx
+│   │   ├── ToastPage.tsx
+│   │   ├── SeasonalPage.tsx
+│   │   └── PlaygroundPage.tsx
 │   ├── App.tsx
+│   ├── Layout.tsx
 │   ├── main.tsx
 │   └── index.css
 ├── .gitignore
@@ -72,7 +79,14 @@ react-confetti-app/
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-├── PLAN.md
-├── PROJECT_NOTES.md
 └── README.md
 ```
+
+## Author
+
+**kkoisland (Keiko)**
+- GitHub: [@kkoisland](https://github.com/kkoisland)
+
+## Acknowledgments
+
+Built with [react-confetti](https://github.com/alampros/react-confetti) by [@alampros](https://github.com/alampros).
