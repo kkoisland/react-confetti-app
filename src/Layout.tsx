@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+
+const NAV_ACTIVE_STYLES = "text-indigo-600 dark:text-indigo-300 font-bold";
+const NAV_HOVER_STYLES = "hover:text-indigo-600 dark:hover:text-indigo-300";
 
 const Layout = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,7 +37,7 @@ const Layout = () => {
 						<div>
 							<Link
 								to="/"
-								className="text-2xl font-bold hover:text-indigo-900 transition-colors"
+								className={`text-2xl font-bold ${NAV_HOVER_STYLES} transition-colors`}
 							>
 								React Confetti
 							</Link>
@@ -43,13 +46,17 @@ const Layout = () => {
 						{/* Desktop Navigation */}
 						<div className="hidden md:flex space-x-8">
 							{navLinks.map((link) => (
-								<Link
+								<NavLink
 									key={link.to}
 									to={link.to}
-									className="hover:text-indigo-900 transition-colors"
+									className={({ isActive }) =>
+										`${NAV_HOVER_STYLES} transition-colors ${
+											isActive ? NAV_ACTIVE_STYLES : ""
+										}`
+									}
 								>
 									{link.label}
-								</Link>
+								</NavLink>
 							))}
 						</div>
 
@@ -63,7 +70,7 @@ const Layout = () => {
 								<button
 									type="button"
 									onClick={() => setIsMenuOpen(!isMenuOpen)}
-									className="text-3xl hover:text-indigo-900 transition-colors"
+									className={`text-3xl ${NAV_HOVER_STYLES} transition-colors`}
 								>
 									{isMenuOpen ? "✕" : "☰"}
 								</button>
@@ -74,14 +81,18 @@ const Layout = () => {
 					{isMenuOpen && (
 						<div className="md:hidden mt-4">
 							{navLinks.map((link) => (
-								<Link
+								<NavLink
 									key={link.to}
 									to={link.to}
 									onClick={() => setIsMenuOpen(false)}
-									className="block py-3 px-4 text-lg hover:text-indigo-900 transition-colors font-bold"
+									className={({ isActive }) =>
+										`block py-3 px-4 text-lg ${NAV_HOVER_STYLES} transition-colors font-bold ${
+											isActive ? NAV_ACTIVE_STYLES : ""
+										}`
+									}
 								>
 									{link.label}
-								</Link>
+								</NavLink>
 							))}
 						</div>
 					)}

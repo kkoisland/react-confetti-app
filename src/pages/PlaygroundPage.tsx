@@ -190,7 +190,7 @@ const PlaygroundPage = () => {
 							type="range"
 							min="0"
 							max="0.3"
-							step="0.01"
+							step="0.001"
 							value={gravity}
 							onChange={(e) => setGravity(Number(e.target.value))}
 							onMouseUp={restartConfetti}
